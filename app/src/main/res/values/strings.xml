@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">SmartCities</string>
+    <string name="SmartCitiesTitle">Smart Cities</string>
+    <string name="addNote">Add Note</string>
+    <string name="ConsultNotes">Consult Notes</string>
+    <string name="login">Login</string>
+    <string name="startSession">Start Session</string>
+    <string name="user">Username</string>
+    <string name="pass" translatable="false">Password</string>
+</resources>

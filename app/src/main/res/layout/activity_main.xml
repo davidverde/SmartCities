@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/SmartCitiesTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:textColor="@color/azulMedio"
+        android:textSize="45dp"
+        android:textStyle="bold"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bordinha"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/startSession"
+            android:textSize="30dp"
+            android:textColor="@color/azulMedio"
+            android:layout_margin="20dp"
+            android:layout_marginTop="15dp"
+            />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/user"
+            android:background="@color/azulClaro"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:ems="10"
+            android:inputType="text"/>
+
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/pass"
+            android:background="@color/azulClaro"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="15dp"
+            android:ems="10"
+            android:inputType="textPassword"/>
+
+        <Button
+            android:id="@+id/password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login"
+            android:backgroundTint="@color/azulClaro"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
+        </Button>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:background="@color/azulMedio">
+
+        <Button
+            android:id="@+id/AddNote"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/addNote"
+            android:backgroundTint="@color/azulMedio"
+            android:layout_weight="40">
+        </Button>
+
+        <Button
+            android:id="@+id/linhabranca"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/white"
+            android:text="."
+            android:layout_weight="1">
+        </Button>
+
+        <Button
+            android:id="@+id/consultNote"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/ConsultNotes"
+            android:backgroundTint="@color/azulMedio"
+            android:layout_weight="40"
+            android:onClick="listaNotas">
+        </Button>
+
+    </LinearLayout>
+
+</RelativeLayout>

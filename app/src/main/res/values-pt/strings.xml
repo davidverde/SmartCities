@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SmartCities</string>
+    <string name="SmartCitiesTitle">Cidades Inteligentes</string>
+    <string name="startSession">Iniciar Sessão</string>
+</resources>
