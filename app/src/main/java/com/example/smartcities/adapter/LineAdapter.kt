@@ -1,43 +1,41 @@
 package com.example.smartcities.adapter
 
-import android.content.Intent
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.smartcities.R
-import com.example.smartcities.dataClasses.Place
+import com.example.smartcities.entities.Note
 import kotlinx.android.synthetic.main.recyclerline.view.*
 
-class LineAdapter(val list: ArrayList<Place>):RecyclerView.Adapter<LineViewHolder>(){
+class LineAdapter internal constructor(
+    context: Context
+) : RecyclerView.Adapter<LineAdapter.NoteViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LineViewHolder {
+    private val inflater: LayoutInflater = LayoutInflater.from(context)
+    private var notes = emptyList<Note>() // Cached copy of cities
 
-        val itemView = LayoutInflater
-            .from(parent.context)
-            .inflate(R.layout.recyclerline, parent, false);
-        return LineViewHolder(itemView)
+    class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val noteItemView: TextView = itemView.findViewById(R.id.title)
     }
 
-    override fun getItemCount(): Int {
-        return list.size
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
+        val itemView = inflater.inflate(R.layout.recyclerline, parent, false)
+        return NoteViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: LineViewHolder, position: Int) {
-        val currentPlace = list[position]
-
-        holder.name.text = currentPlace.name
-        holder.capital.text = currentPlace.capital
-        //holder.nhabitants.text = currentPlace.habitants.toString()
+    override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
+        val current = notes[position]
+        holder.noteItemView.text = current.note
     }
 
-}
+    internal fun setNotes(notes: List<Note>) {
+        this.notes = notes
+        notifyDataSetChanged()
+    }
 
-class LineViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-
-    val name = itemView.name
-    val capital = itemView.capital
-    //var nhabitants = itemView.habitants
+    override fun getItemCount() = notes.size
 
 }

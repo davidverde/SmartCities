@@ -3,4 +3,7 @@
     <string name="app_name">SmartCities</string>
     <string name="SmartCitiesTitle">Cidades Inteligentes</string>
     <string name="startSession">Iniciar Sessão</string>
+    <string name="tituloNota">Titulo da nota</string>
+    <string name="descricaoNota">Descrição da nota</string>
+    <string name="save">Guardar</string>
 </resources>

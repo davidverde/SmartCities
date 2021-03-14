@@ -84,6 +84,7 @@
             android:layout_height="wrap_content"
             android:text="@string/addNote"
             android:backgroundTint="@color/azulMedio"
+            android:onClick="addNotas"
             android:layout_weight="40">
         </Button>
 
