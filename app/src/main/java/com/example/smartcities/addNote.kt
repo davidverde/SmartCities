@@ -7,8 +7,13 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
+import com.example.smartcities.viewModel.NoteViewModel
 
 class addNote : AppCompatActivity() {
+
+    private lateinit var desc: EditText
+    private lateinit var title: EditText
+    private lateinit var notaViewModel: NoteViewModel
 
     private lateinit var noteText: EditText
     private lateinit var description: EditText

@@ -21,12 +21,14 @@
         android:layout_marginLeft="280dp">
 
         <ImageButton
+            android:id="@+id/editarNota"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_orion_pencil"
             android:background="@color/white"
             android:layout_margin="15dp"/>
         <ImageButton
+            android:id="@+id/eliminarNota"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_icons8_trash"

@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_recycler_lista.*
 
 
-class recyclerLista : AppCompatActivity() {
+class recyclerLista : AppCompatActivity(), LineAdapter.CallbackInterface {
 
     private lateinit var noteViewModel: NoteViewModel
     private val newWordActivityRequestCode = 1
@@ -27,7 +27,7 @@ class recyclerLista : AppCompatActivity() {
 
         // recycler view
         val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
-        val adapter = LineAdapter(this)
+        val adapter = LineAdapter(this, this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -38,6 +38,10 @@ class recyclerLista : AppCompatActivity() {
             notes?.let { adapter.setNotes(it) }
         })
 
+    }
+
+    override fun passResultCallback(id: Int?) {
+        noteViewModel.delete(id)
     }
 
 }

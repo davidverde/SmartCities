@@ -11,4 +11,6 @@
     <string name="descricaoNota">Note Description</string>
     <string name="save">Save</string>
     <string name="error" translatable="false">Error</string>
+    <string name="edit">Edit</string>
+    <string name="cancel">Cancel</string>
 </resources>

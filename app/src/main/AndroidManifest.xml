@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartCities">
-        <activity android:name=".addNote"></activity>
+        <activity android:name=".editNote"></activity>
+        <activity android:name=".addNote" />
         <activity android:name=".recyclerLista" />
         <activity android:name=".MainActivity">
             <intent-filter>

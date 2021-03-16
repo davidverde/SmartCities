@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/note_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:hint="@string/tituloNota"
+        android:inputType="textAutoComplete"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/description_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:hint="@string/descricaoNota"
+        android:inputType="textAutoComplete"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/button_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/azulEscuro"
+        android:onClick="Editar"
+        android:text="@string/edit"
+        />
+    <Button
+    android:id="@+id/button_edit_cancel"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/azulEscuro"
+    android:text="@string/cancel"
+    />
+
+</LinearLayout>
