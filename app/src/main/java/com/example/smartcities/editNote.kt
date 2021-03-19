@@ -8,6 +8,7 @@ import android.text.TextUtils
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.smartcities.adapter.DESCRICAO
 import com.example.smartcities.adapter.ID
@@ -53,14 +54,32 @@ class editNote : AppCompatActivity() {
         val replyIntent = Intent()
         if (TextUtils.isEmpty(title.text) || TextUtils.isEmpty(desc.text))  {
             setResult(Activity.RESULT_CANCELED, replyIntent)
-
+            if(TextUtils.isEmpty(title.text)){
+                title.setError(getString(R.string.miss_title))
+            }
+            if(TextUtils.isEmpty(desc.text)){
+                desc.setError(getString(R.string.miss_description))
+            }
+            Toast.makeText(this, R.string.erro_edit_nota, Toast.LENGTH_SHORT).show()
         } else {
             val nota = Note(id = message3, note = title.text.toString(), descricao = desc.text.toString())
             notaViewModel.update(nota)
 
-
+            finish()
         }
-        finish()
+
+    }
+
+    fun ConsultNotas_1(view: View) {
+        val intent = Intent(this, recyclerLista::class.java).apply {
+        }
+        startActivity(intent)
+    }
+
+    fun login_1(view: View) {
+        val intent = Intent(this, MainActivity::class.java).apply {
+        }
+        startActivity(intent)
     }
 
 

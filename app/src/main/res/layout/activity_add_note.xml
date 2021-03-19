@@ -1,33 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/note"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:hint="@string/tituloNota"
+            android:inputType="textAutoComplete"
+            android:textSize="18sp"
+            android:ems="100"/>
+
+        <EditText
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:hint="@string/descricaoNota"
+            android:inputType="textAutoComplete"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/button_save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/azulEscuro"
+            android:text="@string/save"
+            />
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light"
-        android:hint="@string/tituloNota"
-        android:inputType="textAutoComplete"
-        android:textSize="18sp" />
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:background="@color/azulMedio">
 
-    <EditText
-        android:id="@+id/description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light"
-        android:hint="@string/descricaoNota"
-        android:inputType="textAutoComplete"
-        android:textSize="18sp" />
+        <Button
+            android:id="@+id/AddNote_3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/ConsultNotes"
+            android:backgroundTint="@color/azulMedio"
+            android:onClick="ConsultNotas_3"
+            android:layout_weight="40">
+        </Button>
 
-    <Button
-        android:id="@+id/button_save"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/azulEscuro"
-        android:text="@string/save"
-        />
+        <Button
+            android:id="@+id/linhabranca_3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/white"
+            android:text="."
+            android:layout_weight="1">
+        </Button>
 
-</LinearLayout>
+        <Button
+            android:id="@+id/consultNote_3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/login"
+            android:backgroundTint="@color/azulMedio"
+            android:layout_weight="40"
+            android:onClick="login_3">
+        </Button>
+
+    </LinearLayout>
+
+</RelativeLayout>

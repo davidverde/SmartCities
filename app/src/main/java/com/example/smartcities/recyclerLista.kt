@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -42,6 +43,18 @@ class recyclerLista : AppCompatActivity(), LineAdapter.CallbackInterface {
 
     override fun passResultCallback(id: Int?) {
         noteViewModel.delete(id)
+    }
+
+    fun ConsultNotas_4(view: View) {
+        val intent = Intent(this, addNote::class.java).apply {
+        }
+        startActivity(intent)
+    }
+
+    fun login_4(view: View) {
+        val intent = Intent(this, MainActivity::class.java).apply {
+        }
+        startActivity(intent)
     }
 
 }

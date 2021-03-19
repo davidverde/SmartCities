@@ -6,12 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.smartcities.R
 import com.example.smartcities.addNote
 import com.example.smartcities.editNote
 import com.example.smartcities.entities.Note
+import com.example.smartcities.show_note_detail
 import kotlinx.android.synthetic.main.recyclerline.view.*
 
 const val TITULO="TITULO"
@@ -29,6 +31,7 @@ class LineAdapter internal constructor(
         val noteItemView: TextView = itemView.findViewById(R.id.title)
         val edit: ImageButton = itemView.findViewById(R.id.editarNota)
         val delete: ImageButton = itemView.findViewById(R.id.eliminarNota)
+        val detalhesNota: RelativeLayout = itemView.findViewById(R.id.linha)
     }
 
     interface CallbackInterface {
@@ -56,6 +59,18 @@ class LineAdapter internal constructor(
             val titl = holder.noteItemView.text.toString()
 
             val intent = Intent(context, editNote::class.java).apply {
+                putExtra(TITULO, titl)
+                putExtra(DESCRICAO, descricao )
+                putExtra( ID,id)
+            }
+            context.startActivity(intent)
+        }
+
+        holder.detalhesNota.setOnClickListener {
+            val context = holder.noteItemView.context
+            val titl = holder.noteItemView.text.toString()
+
+            val intent = Intent(context, show_note_detail::class.java).apply {
                 putExtra(TITULO, titl)
                 putExtra(DESCRICAO, descricao )
                 putExtra( ID,id)
