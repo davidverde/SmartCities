@@ -1,5 +1,6 @@
 package com.example.smartcities
 
+import android.util.Log
 import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -12,9 +13,20 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import com.example.smartcities.api.EndPoints
+import com.example.smartcities.api.ServiceBuilder
+import com.example.smartcities.api.User
 import com.example.smartcities.entities.Note
 import com.example.smartcities.viewModel.NoteViewModel
 import kotlinx.android.synthetic.main.activity_recycler_lista.*
+
+import kotlinx.android.synthetic.main.activity_main.*
+
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,6 +34,26 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         noteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
+
+        // Retrofit
+        val request = ServiceBuilder.buildService(EndPoints::class.java)
+        val call = request.getUsers()
+
+        call.enqueue(object : Callback<List<User>>{
+            override fun onResponse(call: Call<List<User>>, response: Response<List<User>>){
+
+                if(response.isSuccessful){
+                    for(User in response.body()!!){
+                        Log.d("TAG", User.id_utl.toString())
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<List<User>>, t: Throwable) {
+                Log.d("TAG", "Dei erro")
+                Toast.makeText(this@MainActivity, "${t.message} + olaaa", Toast.LENGTH_SHORT).show()
+            }
+        })
 
     }
     private lateinit var noteViewModel: NoteViewModel
