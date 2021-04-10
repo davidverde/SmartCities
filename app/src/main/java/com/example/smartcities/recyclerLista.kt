@@ -34,7 +34,7 @@ class recyclerLista : AppCompatActivity(), LineAdapter.CallbackInterface {
 
         // view model
         noteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
-        noteViewModel.allNotes.observe(this, Observer { notes ->
+        noteViewModel.allNotes.observe(this, Observer { notes ->            // fazer a monotorização para alterar os dados acrescentados ou tirados OBSERVER
             // Update the cached copy of the words in the adapter.
             notes?.let { adapter.setNotes(it) }
         })
