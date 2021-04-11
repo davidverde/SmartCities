@@ -65,6 +65,7 @@
             android:layout_height="wrap_content"
             android:text="@string/login"
             android:backgroundTint="@color/azulClaro"
+            android:onClick="verificarLogin"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp">
         </Button>

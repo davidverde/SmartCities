@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
         noteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
 
-        // Retrofit
+        // Retrofit - invocação do metodo GET que devolve informação de todos os utilizadores
         val request = ServiceBuilder.buildService(EndPoints::class.java)
         val call = request.getUsers()
 
@@ -44,32 +44,20 @@ class MainActivity : AppCompatActivity() {
 
                 if(response.isSuccessful){
                     for(User in response.body()!!){
-                        Log.d("TAG", User.id_utl.toString())
+                        Log.d("TAG_", User.id_utl.toString() + User.nome.toString())
                     }
                 }
             }
 
             override fun onFailure(call: Call<List<User>>, t: Throwable) {
-                Log.d("TAG", "Dei erro")
-                Toast.makeText(this@MainActivity, "${t.message} + olaaa", Toast.LENGTH_SHORT).show()
+                Log.d("TAG_", "Dei erro")
+                Toast.makeText(this@MainActivity, "${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
-
     }
+
     private lateinit var noteViewModel: NoteViewModel
     private val newWordActivityRequestCode = 1
-
-    fun listaNotas(view: View) {
-        val intent = Intent(this, recyclerLista::class.java).apply {
-        }
-        startActivity(intent)
-    }
-
-    fun addNotas(view: View) {
-        val intent = Intent(this, addNote::class.java).apply {
-        }
-        startActivityForResult(intent, newWordActivityRequestCode)
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -90,4 +78,40 @@ class MainActivity : AppCompatActivity() {
                 Toast.LENGTH_LONG).show()
         }
     }
+
+    fun listaNotas(view: View) {    // botao listar notas
+        val intent = Intent(this, recyclerLista::class.java).apply {
+        }
+        startActivity(intent)
+    }
+
+    fun addNotas(view: View) {      // botao adicionar notas
+        val intent = Intent(this, addNote::class.java).apply {
+        }
+        startActivityForResult(intent, newWordActivityRequestCode)
+    }
+
+    fun verificarLogin(view: View) {        // botao login - verificação
+        val request = ServiceBuilder.buildService(EndPoints::class.java)
+        val call = request.getUserById(2)
+        Log.d("TAG_", "entrei 2")
+
+        call.enqueue(object : Callback<User>{
+            override fun onResponse(call: Call<User>, response: Response<User>) {
+                if(response.isSuccessful){
+                    val utl: User = response.body()!!
+
+                        Log.d("TAG_", utl.id_utl.toString())
+
+                }
+            }
+
+            override fun onFailure(call: Call<User>, t: Throwable) {
+                Log.d("TAG_", t.message.toString())
+                Toast.makeText(this@MainActivity, "${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+
 }
