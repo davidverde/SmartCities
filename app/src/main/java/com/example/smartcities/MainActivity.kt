@@ -94,10 +94,22 @@ class MainActivity : AppCompatActivity() {
 
     fun verificarLogin(view: View) {        // botao login - verificação
 
+        val emailVal = findViewById<EditText>(R.id.email)
+        val passVal = findViewById<EditText>(R.id.pass)
+
+        // Verificações de campos vazios
+
+            if(emailVal.text.isNullOrEmpty()){
+                emailVal.error = getString(R.string.erro_email)
+            }
+            if(passVal.text.isNullOrEmpty()){
+                passVal.error = getString(R.string.erro_pass)
+            }
+
+
 
         val request = ServiceBuilder.buildService(EndPoints::class.java)
         val call = request.postUtl("stania@ipvc.pt", "12345")
-
 
         call.enqueue(object : Callback<List<OutputPost>>{
 

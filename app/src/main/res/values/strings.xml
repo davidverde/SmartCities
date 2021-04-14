@@ -17,4 +17,6 @@
     <string name="erro_edit_nota">Note not edited - missing data</string>
     <string name="miss_title">Missing Title</string>
     <string name="miss_description">Missing Description</string>
+    <string name="erro_email">Missing Email</string>
+    <string name="erro_pass">Missing Password</string>
 </resources>
