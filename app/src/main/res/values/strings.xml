@@ -21,4 +21,9 @@
     <string name="erro_pass">Missing Password</string>
     <string name="erro_login">Fields do not match</string>
     <string name="sucess_login">Login Sucessfull</string>
+    <string name="login_pref" translatable="false">pref</string>
+    <string name="user_logged" translatable="false">logged</string>
+    <string name="email_login_user" translatable="false">email_login_user</string>
+    <string name="id_login_user" translatable="false">id_login_user</string>
+    <string name="nome_login_user" translatable="false">nome_login_user</string>
 </resources>

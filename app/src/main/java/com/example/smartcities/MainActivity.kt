@@ -2,7 +2,9 @@ package com.example.smartcities
 
 import android.util.Log
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -36,8 +38,19 @@ class MainActivity : AppCompatActivity() {
 
         noteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
 
+        val sharedPref: SharedPreferences = getSharedPreferences(
+            getString(R.string.login_pref), Context.MODE_PRIVATE
+        )
+        if (sharedPref != null){
+            if(sharedPref.all[getString(R.string.user_logged)]==true){
+                var intent = Intent(this, mapa_menu::class.java)
+                startActivity(intent)
+
+            }
+        }
+
         // Retrofit - invocação do metodo GET que devolve informação de todos os utilizadores
-        val request = ServiceBuilder.buildService(EndPoints::class.java)
+       /* val request = ServiceBuilder.buildService(EndPoints::class.java)
         val call = request.getUsers()
 
         call.enqueue(object : Callback<List<User>>{
@@ -54,7 +67,7 @@ class MainActivity : AppCompatActivity() {
                 Log.d("TAG_", "Dei erro")
                 //Toast.makeText(this@MainActivity, "${t.message}", Toast.LENGTH_SHORT).show()
             }
-        })
+        }) */
     }
 
     private lateinit var noteViewModel: NoteViewModel
@@ -125,7 +138,23 @@ class MainActivity : AppCompatActivity() {
                     for(OutputPost in response.body()!!){   // verificação se os dados do login correspondem a um utilizador
 
                         if(emailVal.text.toString().equals(OutputPost.email) && passVal.text.toString().equals(OutputPost.pass)){
+
+                            val id = OutputPost.id_utl
+                            val nome = OutputPost.nome
+
                             startActivity(intent)
+
+                            //Guardar utilizador no Shared Preferences
+                            val shared: SharedPreferences = getSharedPreferences(
+                                getString(R.string.login_pref), Context.MODE_PRIVATE
+                            )
+                            with(shared.edit()){
+                                putBoolean(getString(R.string.user_logged), true)
+                                putString(getString(R.string.email_login_user), "${emailVal.text}")
+                                putString(getString(R.string.id_login_user), "${id}")
+                                putString(getString(R.string.nome_login_user), "${nome}")
+                                commit()
+                            }
                         } else if(!(emailVal.text.isNullOrEmpty()) || !(passVal.text.isNullOrEmpty())){
                             erro.visibility = (View.VISIBLE)
                         }
