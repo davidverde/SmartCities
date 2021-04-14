@@ -19,4 +19,6 @@
     <string name="miss_description">Missing Description</string>
     <string name="erro_email">Missing Email</string>
     <string name="erro_pass">Missing Password</string>
+    <string name="erro_login">Fields do not match</string>
+    <string name="sucess_login">Login Sucessfull</string>
 </resources>

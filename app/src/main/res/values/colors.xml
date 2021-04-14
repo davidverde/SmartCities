@@ -10,4 +10,5 @@
     <color name="azulEscuro">#3f51b5</color>
     <color name="azulMedio">#2196f3</color>
     <color name="azulClaro">#03a9f4</color>
+    <color name="red">#ff0000</color>
 </resources>
