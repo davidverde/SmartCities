@@ -93,25 +93,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun verificarLogin(view: View) {        // botao login - verificação
-       /* val request = ServiceBuilder.buildService(EndPoints::class.java)
-        val call = request.getUserById(2)
-        Log.d("TAG_", "entrei 2")
 
-        call.enqueue(object : Callback<User>{
-            override fun onResponse(call: Call<User>, response: Response<User>) {
-                if(response.isSuccessful){
-                    val utl: User = response.body()!!
-
-                        Log.d("TAG_", utl.id_utl.toString())
-
-                }
-            }
-
-            override fun onFailure(call: Call<User>, t: Throwable) {
-                Log.d("TAG_", t.message.toString())
-                Toast.makeText(this@MainActivity, "${t.message}", Toast.LENGTH_SHORT).show()
-            }
-        }) */
 
         val request = ServiceBuilder.buildService(EndPoints::class.java)
         val call = request.postUtl("stania@ipvc.pt", "12345")
