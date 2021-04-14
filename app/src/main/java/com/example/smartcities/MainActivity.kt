@@ -14,6 +14,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.smartcities.api.EndPoints
+import com.example.smartcities.api.OutputPost
 import com.example.smartcities.api.ServiceBuilder
 import com.example.smartcities.api.User
 import com.example.smartcities.entities.Note
@@ -51,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<List<User>>, t: Throwable) {
                 Log.d("TAG_", "Dei erro")
-                Toast.makeText(this@MainActivity, "${t.message}", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this@MainActivity, "${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -92,7 +93,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun verificarLogin(view: View) {        // botao login - verificação
-        val request = ServiceBuilder.buildService(EndPoints::class.java)
+       /* val request = ServiceBuilder.buildService(EndPoints::class.java)
         val call = request.getUserById(2)
         Log.d("TAG_", "entrei 2")
 
@@ -110,7 +111,32 @@ class MainActivity : AppCompatActivity() {
                 Log.d("TAG_", t.message.toString())
                 Toast.makeText(this@MainActivity, "${t.message}", Toast.LENGTH_SHORT).show()
             }
+        }) */
+
+        val request = ServiceBuilder.buildService(EndPoints::class.java)
+        val call = request.postUtl("stania@ipvc.pt", "12345")
+
+
+        call.enqueue(object : Callback<List<OutputPost>>{
+
+            override fun onResponse(call: Call<List<OutputPost>>, response: Response<List<OutputPost>>) {
+
+                if (response.isSuccessful){
+                    for(OutputPost in response.body()!!){
+
+                        Log.d("TAG_", OutputPost.email.toString() + OutputPost.pass.toString())
+                    }
+
+                }
+            }
+
+            override fun onFailure(call: Call<List<OutputPost>>, t: Throwable) {
+                /* Toast.makeText(this@MainActivity, "${t.message}", Toast.LENGTH_SHORT).show()*/
+                Log.d("TAG_", "err: " + t.message)
+            }
         })
+
+
     }
 
 
