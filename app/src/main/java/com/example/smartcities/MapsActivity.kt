@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.smartcities.api.Anomalia
 import com.example.smartcities.api.EndPoints
@@ -17,6 +18,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import retrofit2.Call
@@ -35,8 +37,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-
-        var id_utl : Any?
+        // guardar o id do utilizador atual
+        var id_utl : Any? = 0
 
         val sharedPref: SharedPreferences = getSharedPreferences(
             getString(R.string.login_pref), Context.MODE_PRIVATE
@@ -46,7 +48,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
 
-        // invocar pedido post com os paramotros do login
+        // invocar pedido GET anomalias
         val request = ServiceBuilder.buildService(EndPoints::class.java)
         val call = request.getAnomalias()
         var coordenadas : LatLng
@@ -56,11 +58,22 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             override fun onResponse(call: Call<List<Anomalia>>, response: Response<List<Anomalia>>) {
 
                 if (response.isSuccessful){
-                    for(Anomalia in response.body()!!){   // verificação se os dados do login correspondem a um utilizador
+                    for(Anomalia in response.body()!!){   // listar todas as anomalias recebidas no mapa
+
                         coordenadas = LatLng(Anomalia.latitude, Anomalia.longitude)
-                        mMap.addMarker(MarkerOptions().position(coordenadas).title(Anomalia.utilizador_id.toString() + " - " + Anomalia.titulo))
+
+                        if(id_utl.toString().toInt() == Anomalia.utilizador_id){   // se a anomalia for do utilizador logado aparece o marcador azul
+                            mMap.addMarker(MarkerOptions()
+                                    .position(coordenadas).title(Anomalia.utilizador_id.toString() + " - " + Anomalia.titulo)
+                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
+                        } else {
+                            mMap.addMarker(MarkerOptions()
+                                    .position(coordenadas).title(Anomalia.utilizador_id.toString() + " - " + Anomalia.titulo)   // titulo
+                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)))              //cor
+                        }
                     }
                 }
+
             }
 
             override fun onFailure(call: Call<List<Anomalia>>, t: Throwable) {
@@ -147,4 +160,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         //mMap.addMarker(MarkerOptions().position(viana).title("Centro de Viana"))
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(viana, 15.0f)) // centra o mapa nas cordenadas do ponto e com o zoom já aplicado
     }
+
+    // caso o utilizador utilize o botão de voltar para tras do telefone
+    override fun onBackPressed() {
+        Toast.makeText(this, R.string.erro_voltar_atras, Toast.LENGTH_SHORT).show()
+    }
+
 }

@@ -14,4 +14,6 @@
     <string name="menu_mapa">Menu Mapa</string>
     <string name="voltar">Voltar</string>
     <string name="erro_formato_email">Precisa de ser um login</string>
+    <string name="erro_voltar_atras">Termine a sessão para voltar atras</string>
+    <string name="erro_voltar_login">Não é possivel voltar atras</string>
 </resources>

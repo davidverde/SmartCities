@@ -174,4 +174,10 @@ class MainActivity : AppCompatActivity() {
             })
         }
     }
+
+    // caso o utilizador utilize o botão de voltar para tras do telefone
+    override fun onBackPressed() {
+        Toast.makeText(this, R.string.erro_voltar_atras, Toast.LENGTH_SHORT).show()
+    }
+
 }
