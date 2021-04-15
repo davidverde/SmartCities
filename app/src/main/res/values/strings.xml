@@ -3,9 +3,9 @@
     <string name="SmartCitiesTitle">Smart Cities</string>
     <string name="addNote">Add Note</string>
     <string name="ConsultNotes">Consult Notes</string>
-    <string name="login">Login</string>
+    <string name="login" translatable="false">Login</string>
     <string name="startSession">Start Session</string>
-    <string name="user">Username</string>
+    <string name="user" translatable="false">Email</string>
     <string name="pass" translatable="false">Password</string>
     <string name="tituloNota">Note Title</string>
     <string name="descricaoNota">Note Description</string>
@@ -26,4 +26,8 @@
     <string name="email_login_user" translatable="false">email_login_user</string>
     <string name="id_login_user" translatable="false">id_login_user</string>
     <string name="nome_login_user" translatable="false">nome_login_user</string>
+    <string name="logout">Logout</string>
+    <string name="menu_mapa">Map Menu</string>
+    <string name="voltar">Back</string>
+    <string name="erro_formato_email">Needs to be an email</string>
 </resources>

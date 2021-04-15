@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:ignore="ExtraText">
+
+    <item
+        android:id="@+id/titulo"
+        android:icon="@drawable/ic_menu"
+        android:title="@string/menu_mapa"
+        app:showAsAction="always">
+        <menu>
+            <item android:id="@+id/mapa_menu_consultar_notas"
+                android:title="@string/ConsultNotes"/>
+            <item android:id="@+id/mapa_menu_add_nota"
+                android:title="@string/addNote"/>
+            <item android:id="@+id/mapa_menu_logout"
+                android:title="@string/logout"/>
+        </menu>
+    </item>
+
+</menu>

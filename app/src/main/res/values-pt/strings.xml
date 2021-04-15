@@ -6,4 +6,12 @@
     <string name="tituloNota">Titulo da nota</string>
     <string name="descricaoNota">Descrição da nota</string>
     <string name="save">Guardar</string>
+    <string name="addNote">Adicionar Nota</string>
+    <string name="ConsultNotes">Consultar Notas</string>
+    <string name="edit">Editar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="logout">Terminar Sessão</string>
+    <string name="menu_mapa">Menu Mapa</string>
+    <string name="voltar">Voltar</string>
+    <string name="erro_formato_email">Precisa de ser um login</string>
 </resources>

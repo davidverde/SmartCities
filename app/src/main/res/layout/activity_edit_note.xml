@@ -80,7 +80,7 @@
             android:id="@+id/consultNote_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/login"
+            android:text="@string/voltar"
             android:backgroundTint="@color/azulMedio"
             android:layout_weight="40"
             android:onClick="login_1">

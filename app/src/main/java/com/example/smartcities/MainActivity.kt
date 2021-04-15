@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Patterns
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -118,57 +119,59 @@ class MainActivity : AppCompatActivity() {
 
         // Verificações de campos vazios
 
-            if(emailVal.text.isNullOrEmpty()){
-                emailVal.error = getString(R.string.erro_email)
-            }
-            if(passVal.text.isNullOrEmpty()){
-                passVal.error = getString(R.string.erro_pass)
-            }
+        if(emailVal.text.isNullOrEmpty()){
+            emailVal.error = getString(R.string.erro_email)
+        }else if(!Patterns.EMAIL_ADDRESS.matcher(emailVal.text.toString()).matches()) {
+            email.error = getString(R.string.erro_formato_email)
+        }
+        if(passVal.text.isNullOrEmpty()){
+            passVal.error = getString(R.string.erro_pass)
+        }else {
+            
+            // invocar pedido post com os paramotros do login
+            val request = ServiceBuilder.buildService(EndPoints::class.java)
+            val call = request.postUtl(emailVal.text.toString(), passVal.text.toString())
 
+            call.enqueue(object : Callback<List<OutputPost>>{
 
-        // invocar pedido post com os paramotros do login
-        val request = ServiceBuilder.buildService(EndPoints::class.java)
-        val call = request.postUtl(emailVal.text.toString(), passVal.text.toString())
+                override fun onResponse(call: Call<List<OutputPost>>, response: Response<List<OutputPost>>) {
 
-        call.enqueue(object : Callback<List<OutputPost>>{
+                    if (response.isSuccessful){
+                        for(OutputPost in response.body()!!){   // verificação se os dados do login correspondem a um utilizador
 
-            override fun onResponse(call: Call<List<OutputPost>>, response: Response<List<OutputPost>>) {
+                            if(emailVal.text.toString().equals(OutputPost.email) && passVal.text.toString().equals(OutputPost.pass)){
 
-                if (response.isSuccessful){
-                    for(OutputPost in response.body()!!){   // verificação se os dados do login correspondem a um utilizador
+                                val id = OutputPost.id_utl
+                                val nome = OutputPost.nome
 
-                        if(emailVal.text.toString().equals(OutputPost.email) && passVal.text.toString().equals(OutputPost.pass)){
+                                startActivity(intent)
 
-                            val id = OutputPost.id_utl
-                            val nome = OutputPost.nome
-
-                            startActivity(intent)
-
-                            //Guardar utilizador no Shared Preferences
-                            val shared: SharedPreferences = getSharedPreferences(
-                                getString(R.string.login_pref), Context.MODE_PRIVATE
-                            )
-                            with(shared.edit()){
-                                putBoolean(getString(R.string.user_logged), true)
-                                putString(getString(R.string.email_login_user), "${emailVal.text}")
-                                putString(getString(R.string.id_login_user), "${id}")
-                                putString(getString(R.string.nome_login_user), "${nome}")
-                                commit()
+                                //Guardar utilizador no Shared Preferences
+                                val shared: SharedPreferences = getSharedPreferences(
+                                    getString(R.string.login_pref), Context.MODE_PRIVATE
+                                )
+                                with(shared.edit()){
+                                    putBoolean(getString(R.string.user_logged), true)
+                                    putString(getString(R.string.email_login_user), "${emailVal.text}")
+                                    putString(getString(R.string.id_login_user), "${id}")
+                                    putString(getString(R.string.nome_login_user), "${nome}")
+                                    commit()
+                                }
+                            } else if(!(emailVal.text.isNullOrEmpty()) || !(passVal.text.isNullOrEmpty())){
+                                erro.visibility = (View.VISIBLE)
                             }
-                        } else if(!(emailVal.text.isNullOrEmpty()) || !(passVal.text.isNullOrEmpty())){
-                            erro.visibility = (View.VISIBLE)
-                        }
 
+                        }
                     }
                 }
-            }
 
-            override fun onFailure(call: Call<List<OutputPost>>, t: Throwable) {
-                /* Toast.makeText(this@MainActivity, "${t.message}", Toast.LENGTH_SHORT).show()*/
-                Log.d("TAG_", "err: " + t.message)
-                erro.visibility = (View.VISIBLE)
-            }
+                override fun onFailure(call: Call<List<OutputPost>>, t: Throwable) {
+                    /* Toast.makeText(this@MainActivity, "${t.message}", Toast.LENGTH_SHORT).show()*/
+                    Log.d("TAG_", "err: " + t.message)
+                    erro.visibility = (View.VISIBLE)
+                }
 
-        })
+            })
+        }
     }
 }
