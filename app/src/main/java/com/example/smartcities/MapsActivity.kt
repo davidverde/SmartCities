@@ -20,6 +20,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import retrofit2.Call
 import retrofit2.Callback
@@ -65,10 +66,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                         if(id_utl.toString().toInt() == Anomalia.utilizador_id){   // se a anomalia for do utilizador logado aparece o marcador azul
                             mMap.addMarker(MarkerOptions()
                                     .position(coordenadas).title(Anomalia.utilizador_id.toString() + " - " + Anomalia.titulo)
+                                    .snippet(Anomalia.descricao + "," + Anomalia.imagem)
                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
                         } else {
                             mMap.addMarker(MarkerOptions()
                                     .position(coordenadas).title(Anomalia.utilizador_id.toString() + " - " + Anomalia.titulo)   // titulo
+                                    .snippet(Anomalia.descricao + "," + Anomalia.imagem)
                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)))              //cor
                         }
                     }
@@ -83,6 +86,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         })
 
     }
+
+
 
 
     /* --------- TOP MENU --------------- */
@@ -159,11 +164,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val viana = LatLng(41.6946, -8.83016)
         //mMap.addMarker(MarkerOptions().position(viana).title("Centro de Viana"))
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(viana, 15.0f)) // centra o mapa nas cordenadas do ponto e com o zoom já aplicado
+        mMap.setInfoWindowAdapter(infoWindowAdapter(this))
     }
+
 
     // caso o utilizador utilize o botão de voltar para tras do telefone
     override fun onBackPressed() {
         Toast.makeText(this, R.string.erro_voltar_atras, Toast.LENGTH_SHORT).show()
     }
+
+
+
 
 }
