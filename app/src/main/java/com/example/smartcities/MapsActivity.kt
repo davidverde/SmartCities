@@ -65,12 +65,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
                         if(id_utl.toString().toInt() == Anomalia.utilizador_id){   // se a anomalia for do utilizador logado aparece o marcador azul
                             mMap.addMarker(MarkerOptions()
-                                    .position(coordenadas).title(Anomalia.utilizador_id.toString() + " - " + Anomalia.titulo)
+                                    .position(coordenadas).title(Anomalia.titulo)
                                     .snippet(Anomalia.descricao + "," + Anomalia.imagem)
                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
                         } else {
                             mMap.addMarker(MarkerOptions()
-                                    .position(coordenadas).title(Anomalia.utilizador_id.toString() + " - " + Anomalia.titulo)   // titulo
+                                    .position(coordenadas).title(Anomalia.titulo)   // titulo
                                     .snippet(Anomalia.descricao + "," + Anomalia.imagem)
                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)))              //cor
                         }

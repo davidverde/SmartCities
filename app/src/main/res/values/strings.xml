@@ -33,4 +33,6 @@
     <string name="title_activity_maps">Map</string>
     <string name="erro_voltar_atras">Logout to go back</string>
     <string name="erro_voltar_login">Can not go back here</string>
+    <string name="Editar">Edit anomaly</string>
+    <string name="delete">Delete</string>
 </resources>

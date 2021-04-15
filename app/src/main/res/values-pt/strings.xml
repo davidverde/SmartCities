@@ -16,4 +16,6 @@
     <string name="erro_formato_email">Precisa de ser um login</string>
     <string name="erro_voltar_atras">Termine a sessão para voltar atras</string>
     <string name="erro_voltar_login">Não é possivel voltar atras</string>
+    <string name="Editar">Editar</string>
+    <string name="delete">Eliminar</string>
 </resources>

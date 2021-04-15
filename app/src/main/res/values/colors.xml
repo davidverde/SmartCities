@@ -11,4 +11,6 @@
     <color name="azulMedio">#2196f3</color>
     <color name="azulClaro">#03a9f4</color>
     <color name="red">#ff0000</color>
+    <color name="crimson">#DC143C</color>
+
 </resources>
