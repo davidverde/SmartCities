@@ -4,15 +4,24 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.example.smartcities.api.Anomalia
+import com.example.smartcities.api.EndPoints
+import com.example.smartcities.api.OutputPost
+import com.example.smartcities.api.ServiceBuilder
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -25,6 +34,41 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager
                 .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+
+        var id_utl : Any?
+
+        val sharedPref: SharedPreferences = getSharedPreferences(
+            getString(R.string.login_pref), Context.MODE_PRIVATE
+        )
+        if (sharedPref != null){
+            id_utl = sharedPref.all[getString(R.string.id_login_user)]
+        }
+
+
+        // invocar pedido post com os paramotros do login
+        val request = ServiceBuilder.buildService(EndPoints::class.java)
+        val call = request.getAnomalias()
+        var coordenadas : LatLng
+
+        call.enqueue(object : Callback<List<Anomalia>> {
+
+            override fun onResponse(call: Call<List<Anomalia>>, response: Response<List<Anomalia>>) {
+
+                if (response.isSuccessful){
+                    for(Anomalia in response.body()!!){   // verificação se os dados do login correspondem a um utilizador
+                        coordenadas = LatLng(Anomalia.latitude, Anomalia.longitude)
+                        mMap.addMarker(MarkerOptions().position(coordenadas).title(Anomalia.utilizador_id.toString() + " - " + Anomalia.titulo))
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<List<Anomalia>>, t: Throwable) {
+                /* Toast.makeText(this@MainActivity, "${t.message}", Toast.LENGTH_SHORT).show()*/
+                Log.d("TAG_", "err: " + t.message)
+            }
+        })
+
     }
 
 
@@ -100,7 +144,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         // Add a marker in Sydney and move the camera
         val viana = LatLng(41.6946, -8.83016)
-        mMap.addMarker(MarkerOptions().position(viana).title("Centro de Viana"))
+        //mMap.addMarker(MarkerOptions().position(viana).title("Centro de Viana"))
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(viana, 15.0f)) // centra o mapa nas cordenadas do ponto e com o zoom já aplicado
     }
 }
