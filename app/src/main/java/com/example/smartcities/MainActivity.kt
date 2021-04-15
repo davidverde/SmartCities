@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         )
         if (sharedPref != null){
             if(sharedPref.all[getString(R.string.user_logged)]==true){
-                var intent = Intent(this, mapa_menu::class.java)
+                var intent = Intent(this, MapsActivity::class.java)
                 startActivity(intent)
 
             }
@@ -112,7 +112,7 @@ class MainActivity : AppCompatActivity() {
         val passVal = findViewById<EditText>(R.id.pass)
         val erro = findViewById<TextView>(R.id.erro_log)
 
-        val intent = Intent(this, mapa_menu::class.java).apply {
+        val intent = Intent(this, MapsActivity::class.java).apply {
         }
 
         erro.visibility = (View.INVISIBLE)
