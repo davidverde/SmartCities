@@ -37,6 +37,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        this.getSupportActionBar()?.hide()     // retirar default TOP BAR
+
         noteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
 
         val sharedPref: SharedPreferences = getSharedPreferences(
@@ -177,7 +179,7 @@ class MainActivity : AppCompatActivity() {
 
     // caso o utilizador utilize o botão de voltar para tras do telefone
     override fun onBackPressed() {
-        Toast.makeText(this, R.string.erro_voltar_atras, Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, R.string.erro_voltar_login, Toast.LENGTH_SHORT).show()
     }
 
 }

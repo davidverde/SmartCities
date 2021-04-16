@@ -18,4 +18,6 @@
     <string name="erro_voltar_login">Não é possivel voltar atras</string>
     <string name="Editar">Editar</string>
     <string name="delete">Eliminar</string>
+    <string name="reported">Reportado por:</string>
+    <string name="title_activity_maps">Mapa de Anomalias</string>
 </resources>

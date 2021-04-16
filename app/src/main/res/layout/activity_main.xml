@@ -7,20 +7,16 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/SmartCitiesTitle"
+        android:layout_marginTop="25dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:textColor="@color/azulMedio"
-        android:textSize="45dp"
-        android:textStyle="bold"/>
+        android:src="@drawable/logo"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/bordinha"
         android:layout_centerInParent="true"
         android:orientation="vertical"
         android:gravity="center">
@@ -37,27 +33,35 @@
 
         <EditText
             android:id="@+id/email"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:hint="@string/user"
-            android:background="@color/azulClaro"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:background="@drawable/email"
+            android:textColor="@color/azulMedio"
+            android:textColorHint="@color/azulMedio"
             android:ems="10"
-            android:inputType="text"/>
+            android:inputType="text"
+            android:drawableStart="@drawable/costume_ic_email"
+            android:drawableLeft="@drawable/email"/>
 
         <EditText
             android:id="@+id/pass"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:hint="@string/pass"
-            android:background="@color/azulClaro"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:background="@drawable/email"
+            android:textColor="@color/azulMedio"
+            android:textColorHint="@color/azulMedio"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="15dp"
             android:ems="10"
+            android:drawableStart="@drawable/costume_ic_pass"
+            android:drawableLeft="@drawable/pass_24"
             android:inputType="textPassword"/>
 
         <Button

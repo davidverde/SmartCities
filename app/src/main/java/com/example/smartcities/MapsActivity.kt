@@ -40,12 +40,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         // guardar o id do utilizador atual
         var id_utl : Any? = 0
+        var nome : Any? = ""
 
         val sharedPref: SharedPreferences = getSharedPreferences(
             getString(R.string.login_pref), Context.MODE_PRIVATE
         )
         if (sharedPref != null){
             id_utl = sharedPref.all[getString(R.string.id_login_user)]
+            nome = sharedPref.all[getString(R.string.nome_login_user)]
         }
 
 
@@ -66,12 +68,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                         if(id_utl.toString().toInt() == Anomalia.utilizador_id){   // se a anomalia for do utilizador logado aparece o marcador azul
                             mMap.addMarker(MarkerOptions()
                                     .position(coordenadas).title(Anomalia.titulo)
-                                    .snippet(Anomalia.descricao + "," + Anomalia.imagem)
+                                    .snippet(Anomalia.descricao + "+" + Anomalia.imagem + "+" + Anomalia.utilizador_id + "+" + id_utl.toString() + "+" + nome.toString())
                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
                         } else {
                             mMap.addMarker(MarkerOptions()
                                     .position(coordenadas).title(Anomalia.titulo)   // titulo
-                                    .snippet(Anomalia.descricao + "," + Anomalia.imagem)
+                                    .snippet(Anomalia.descricao + "+" + Anomalia.imagem + "+" + Anomalia.utilizador_id + "+" + id_utl.toString() + "+" + nome.toString())
                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)))              //cor
                         }
                     }

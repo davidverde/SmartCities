@@ -3,6 +3,7 @@ package com.example.smartcities
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.content.SharedPreferences
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
@@ -23,22 +24,29 @@ class infoWindowAdapter(context: Context) : GoogleMap.InfoWindowAdapter {
         val tvTitle = view.findViewById<TextView>(R.id.titulo_info)
         val descricao = view.findViewById<TextView>(R.id.descricao)
         val imagem = view.findViewById<ImageView>(R.id.imagem)
-        val linear = view.findViewById<LinearLayout>(R.id.linear)
+        val utl = view.findViewById<TextView>(R.id.utilizador)
+        val botBar = view.findViewById<LinearLayout>(R.id.bottomBar)
 
+        val strs = marker.snippet.split("+").toTypedArray() // dividir a string que contem a descricao, o url e o id do utl
 
+        tvTitle.text = marker.title         // aplicar o TITULO
 
-        tvTitle.text = marker.title         // aplicar o titulo do marcar a view titulo
-        descricao.text = marker.snippet     // aplicar a descricao
-
-        val strs = descricao.text.split(",").toTypedArray() // dividir a string que contem a descricao e o url
-
-        descricao.text = strs[0]
+        descricao.text = strs[0]            // aplicar a descricao
 
         Picasso.get().load(strs[1]).into(imagem); // definir a imagem com o url
 
         imagem.getLayoutParams().height = 450; // ajudtar tamanho da iamgem
-        imagem.getLayoutParams().width = 450;
+        imagem.getLayoutParams().width = 600;
         imagem.requestLayout();
+
+        if(strs[2].toInt() == strs[3].toInt()){     // se o utilizador que reportou a anomalia for o mesmo que tem login iniciado
+            utl.text = "Reported by: " + strs[4]
+            utl.visibility = (View.VISIBLE)
+            botBar.visibility = (View.VISIBLE)
+        }else{                                      // caso nao seja
+            utl.visibility = (View.GONE)
+            botBar.visibility = (View.GONE)
+        }
 
     }
 
