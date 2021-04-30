@@ -26,7 +26,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
 
     private lateinit var mMap: GoogleMap
 
@@ -68,12 +68,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                         if(id_utl.toString().toInt() == Anomalia.utilizador_id){   // se a anomalia for do utilizador logado aparece o marcador azul
                             mMap.addMarker(MarkerOptions()
                                     .position(coordenadas).title(Anomalia.titulo)
-                                    .snippet(Anomalia.descricao + "+" + Anomalia.imagem + "+" + Anomalia.utilizador_id + "+" + id_utl.toString() + "+" + nome.toString())
+                                    .snippet(Anomalia.descricao + "+" + Anomalia.imagem + "+" + Anomalia.utilizador_id + "+" + id_utl.toString() + "+" + nome.toString() + '+' + Anomalia.tipo)
                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
                         } else {
                             mMap.addMarker(MarkerOptions()
                                     .position(coordenadas).title(Anomalia.titulo)   // titulo
-                                    .snippet(Anomalia.descricao + "+" + Anomalia.imagem + "+" + Anomalia.utilizador_id + "+" + id_utl.toString() + "+" + nome.toString())
+                                    .snippet(Anomalia.descricao + "+" + Anomalia.imagem + "+" + Anomalia.utilizador_id + "+" + id_utl.toString() + "+" + nome.toString() + '+' + Anomalia.tipo)
                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)))              //cor
                         }
                     }
@@ -167,6 +167,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         //mMap.addMarker(MarkerOptions().position(viana).title("Centro de Viana"))
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(viana, 15.0f)) // centra o mapa nas cordenadas do ponto e com o zoom já aplicado
         mMap.setInfoWindowAdapter(infoWindowAdapter(this))
+
+        googleMap.setOnInfoWindowClickListener(this)
     }
 
 
@@ -174,6 +176,27 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onBackPressed() {
         Toast.makeText(this, R.string.erro_voltar_atras, Toast.LENGTH_SHORT).show()
     }
+
+
+    override fun onInfoWindowClick(marker: Marker) {
+
+        val strs = marker.snippet.split("+").toTypedArray() //0-descricao 1-imagem 2-utl_report 3-utl_logado 4-nome_utl_logado 5-tipo
+
+        if(strs[2].toInt() == strs[3].toInt()){     // se o utilizador que reportou a anomalia for o mesmo que tem login iniciado
+            val intent = Intent(this, edit_anom::class.java)
+            intent.putExtra("MARKER", marker.title);
+            intent.putExtra("STRS", marker.snippet);
+            startActivity(intent)
+        }else{                                      // caso nao seja
+            val intent = Intent(this, detalhe_anom::class.java)
+            intent.putExtra("MARKER", marker.title);
+            intent.putExtra("STRS", marker.snippet);
+            startActivity(intent)
+        }
+
+    }
+
+
 
 
 

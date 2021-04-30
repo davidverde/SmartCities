@@ -18,4 +18,5 @@ interface EndPoints {
     @POST("myslim/api/utl") // pedido POST para verificar o login
     fun postUtl(@Field("email") first: String, @Field("pass") second: String,): Call<List<OutputPost>>
 
+
 }

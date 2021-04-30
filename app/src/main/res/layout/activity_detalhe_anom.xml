@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".detalhe_anom"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/titulo_info_detalhe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        android:layout_margin="5dp"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/tipo_anom_detalhe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="tipo"
+        android:layout_below="@+id/titulo_info_detalhe"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="5dp"
+        />
+
+    <TextView
+        android:id="@+id/descricao_detalhe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="descricao"
+        android:layout_margin="5dp"
+        android:layout_below="@+id/tipo_anom_detalhe"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:gravity="center_horizontal" />
+
+
+
+    <ImageView
+        android:id="@+id/imagem_detalhe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/descricao_detalhe"
+        android:layout_centerHorizontal="true"
+        android:adjustViewBounds="true"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:background="@color/azulMedio">
+
+        <Button
+            android:id="@+id/AddNote"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/report_anom"
+            android:backgroundTint="@color/azulMedio"
+            android:onClick="addAnom"
+            android:layout_weight="40">
+        </Button>
+
+        <Button
+            android:id="@+id/linhabranca"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/white"
+            android:text="."
+            android:layout_weight="1">
+        </Button>
+
+        <Button
+            android:id="@+id/consultNote"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/menu_mapa"
+            android:backgroundTint="@color/azulMedio"
+            android:layout_weight="40"
+            android:onClick="voltarMapa">
+        </Button>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -25,16 +25,29 @@
             android:layout_centerHorizontal="true"/>
 
         <TextView
+            android:id="@+id/tipo_anom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text=""
+            android:layout_below="@+id/titulo_info"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="5dp"
+            />
+
+        <TextView
             android:id="@+id/descricao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:text="descricao"
             android:layout_margin="5dp"
-            android:layout_below="@+id/titulo_info"
+            android:layout_below="@+id/tipo_anom"
             android:layout_centerHorizontal="true"
             android:textAlignment="center"
             android:gravity="center_horizontal" />
+
+
 
         <TextView
             android:id="@+id/utilizador"
@@ -56,46 +69,6 @@
             android:adjustViewBounds="true"
             />
 
-
-        <LinearLayout
-            android:id="@+id/bottomBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_below="@+id/imagem"
-            android:background="@color/azulMedio">
-
-            <Button
-                android:id="@+id/AddNote"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/Editar"
-                android:backgroundTint="@color/azulMedio"
-                android:onClick="addNotas"
-                android:layout_weight="40">
-            </Button>
-
-            <Button
-                android:id="@+id/linhabranca"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/white"
-                android:textColor="@color/white"
-                android:text="."
-                android:layout_weight="1">
-            </Button>
-
-            <Button
-                android:id="@+id/consultNote"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/delete"
-                android:backgroundTint="@color/azulMedio"
-                android:layout_weight="40"
-                android:onClick="listaNotas">
-            </Button>
-
-        </LinearLayout>
 
     </RelativeLayout>
 

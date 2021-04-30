@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".edit_anom">
+
+    <TextView
+        android:id="@+id/titulo_info_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        android:layout_margin="5dp"
+        android:layout_centerHorizontal="true"/>
+
+
+    <TextView
+        android:id="@+id/utilizador_detalhe_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="utilizador"
+        android:layout_below="@+id/titulo_info_edit"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="5dp"
+        />
+
+    <Spinner
+        android:id="@+id/spinner_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/utilizador_detalhe_edit"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="5dp"
+        />
+
+    <EditText
+        android:id="@+id/descricao_anom_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spinner_edit"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="5dp"
+        />
+
+</RelativeLayout>
