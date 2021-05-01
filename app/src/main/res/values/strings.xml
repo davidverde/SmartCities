@@ -38,4 +38,10 @@
     <string name="reported">"Reported by: "</string>
     <string name="tipo">"Type: "</string>
     <string name="report_anom">Report Anomaly</string>
+    <string name="editarAnom">Edit Anomaly</string>
+    <string name="descricao">Description</string>
+    <string name="titulo">Anomaly Title</string>
+    <string name="missTitle">Missing Title</string>
+    <string name="missDescription">Missing Description</string>
+    <string name="editSucess">Anomaly edited with success</string>
 </resources>

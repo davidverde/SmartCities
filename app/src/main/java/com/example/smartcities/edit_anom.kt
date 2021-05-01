@@ -1,14 +1,24 @@
 package com.example.smartcities
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
-import androidx.core.view.get
-import org.w3c.dom.Text
+import androidx.appcompat.app.AppCompatActivity
+import com.example.smartcities.api.Anomalia
+import com.example.smartcities.api.EditarAnom
+import com.example.smartcities.api.EndPoints
+import com.example.smartcities.api.ServiceBuilder
+import com.google.gson.stream.JsonReader
+import com.squareup.picasso.Picasso
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class edit_anom : AppCompatActivity() {
+
+    var id_anomalia = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,17 +29,29 @@ class edit_anom : AppCompatActivity() {
 
         val strs = array?.split("+")?.toTypedArray()
 
-        val title = this.findViewById<TextView>(R.id.titulo_info_edit)
-        val description = this.findViewById<TextView>(R.id.descricao_anom_edit)
+        val title = this.findViewById<EditText>(R.id.titulo_info_edit)
+        val description = this.findViewById<EditText>(R.id.descricao_anom_edit)
         val  utl = this.findViewById<TextView>(R.id.utilizador_detalhe_edit)
         var spinner = this.findViewById<Spinner>(R.id.spinner_edit)
+        val imagem = this.findViewById<ImageView>(R.id.imagem_edit)
 
         var tipo = ""
         val report = getString(R.string.reported)
 
-        title.text = titulo
-        description.text = strs?.get(0)
+        id_anomalia = strs?.get(6)!!.toInt()
+        title.setText(titulo)
+        description.setText(strs?.get(0))
         utl.text = report + strs?.get(4)
+
+
+
+
+        Picasso.get().load(strs?.get(1)).into(imagem); // definir a imagem com o url
+
+        imagem.getLayoutParams().height = 650 // ajustar tamanho da iamgem
+        imagem.getLayoutParams().width = 800
+        imagem.requestLayout()
+
 
         val options = arrayOf("Obras", "Acidente", "Mau estado", "Indefinido")
 
@@ -44,7 +66,70 @@ class edit_anom : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 //tipo = ""
             }
-
         }
+        if(strs[5].equals("Acidente")){
+            spinner.setSelection(1)
+        }else if(strs[5].equals("Mau estado")){
+            spinner.setSelection(2)
+        }else if(strs[5].equals("Indefinido")){
+            spinner.setSelection(3)
+        }
+    }
+
+    fun editarAnom(view: View) {    // butão editar anomalia
+
+        val title = this.findViewById<EditText>(R.id.titulo_info_edit)
+        val description = this.findViewById<EditText>(R.id.descricao_anom_edit)
+        var spinner = this.findViewById<Spinner>(R.id.spinner_edit)
+
+        val tipo = spinner.selectedItem.toString()
+
+
+        // invocar pedido POST para editar anomalia
+
+        var intent = Intent(this, MapsActivity::class.java)
+
+
+        if (title.text.isNullOrEmpty() || description.text.isNullOrEmpty()) {
+
+            if (title.text.isNullOrEmpty()) {
+                title.error = getString(R.string.missTitle)
+            }
+            if (description.text.isNullOrEmpty()) {
+                description.error = getString(R.string.miss_description)
+            }
+
+        } else {
+
+            val request = ServiceBuilder.buildService(EndPoints::class.java)
+            val call = request.editarAnom(id_anomalia, title.text.toString(), description.text.toString(), tipo)
+
+            call.enqueue(object : Callback<List<EditarAnom>> {
+
+                override fun onResponse(call: Call<List<EditarAnom>>, response: Response<List<EditarAnom>>) {
+                    if (response.isSuccessful) {
+                        Toast.makeText(this@edit_anom, R.string.editSucess, Toast.LENGTH_SHORT).show()
+                        startActivity(intent)
+                    }
+                }
+
+                override fun onFailure(call: Call<List<EditarAnom>>, t: Throwable) {
+                    Log.d("TAG_", "err: " + t.message)
+                }
+
+            })
+            Toast.makeText(this@edit_anom, R.string.editSucess, Toast.LENGTH_SHORT).show()
+            startActivity(intent)
+        }
+    }
+
+
+
+    fun voltarMapa_edit(view: View) { // butão voltar para o mapa
+        super.onBackPressed()   // volta para a atividade anterior e apaga a que estamos
+    }
+
+    fun addAnom_edit(view: View) {  // butão adicionar anomalia
+
     }
 }

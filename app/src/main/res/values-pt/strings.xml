@@ -22,4 +22,10 @@
     <string name="title_activity_maps">Mapa de Anomalias</string>
     <string name="tipo">"Tipo: "</string>
     <string name="report_anom">Reportar Anomalia</string>
+    <string name="editarAnom">Editar Anomalia</string>
+    <string name="descricao">Descrição</string>
+    <string name="titulo">Titulo da Anomalia</string>
+    <string name="missTitle">Falta o Titulo</string>
+    <string name="missDescription">Falta a Descrição</string>
+    <string name="editSucess">A anomalia foi editada com sucesso!</string>
 </resources>

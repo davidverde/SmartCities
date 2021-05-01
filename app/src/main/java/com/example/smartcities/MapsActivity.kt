@@ -68,12 +68,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
                         if(id_utl.toString().toInt() == Anomalia.utilizador_id){   // se a anomalia for do utilizador logado aparece o marcador azul
                             mMap.addMarker(MarkerOptions()
                                     .position(coordenadas).title(Anomalia.titulo)
-                                    .snippet(Anomalia.descricao + "+" + Anomalia.imagem + "+" + Anomalia.utilizador_id + "+" + id_utl.toString() + "+" + nome.toString() + '+' + Anomalia.tipo)
+                                    .snippet(Anomalia.descricao + "+" + Anomalia.imagem + "+" + Anomalia.utilizador_id + "+" + id_utl.toString() + "+" + nome.toString() + '+' + Anomalia.tipo + '+' + Anomalia.id_amon)
                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
                         } else {
                             mMap.addMarker(MarkerOptions()
                                     .position(coordenadas).title(Anomalia.titulo)   // titulo
-                                    .snippet(Anomalia.descricao + "+" + Anomalia.imagem + "+" + Anomalia.utilizador_id + "+" + id_utl.toString() + "+" + nome.toString() + '+' + Anomalia.tipo)
+                                    .snippet(Anomalia.descricao + "+" + Anomalia.imagem + "+" + Anomalia.utilizador_id + "+" + id_utl.toString() + "+" + nome.toString() + '+' + Anomalia.tipo + '+' + Anomalia.id_amon)
                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)))              //cor
                         }
                     }
@@ -180,7 +180,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
 
     override fun onInfoWindowClick(marker: Marker) {
 
-        val strs = marker.snippet.split("+").toTypedArray() //0-descricao 1-imagem 2-utl_report 3-utl_logado 4-nome_utl_logado 5-tipo
+        val strs = marker.snippet.split("+").toTypedArray() //0-descricao 1-imagem 2-utl_report 3-utl_logado 4-nome_utl_logado 5-tipo 6-id_amon
 
         if(strs[2].toInt() == strs[3].toInt()){     // se o utilizador que reportou a anomalia for o mesmo que tem login iniciado
             val intent = Intent(this, edit_anom::class.java)
