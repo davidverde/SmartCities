@@ -25,7 +25,6 @@ interface EndPoints {
 
     @FormUrlEncoded
     @POST("myslim/api/anomalia/delete") // pedido POST para eliminar anomalia
-    fun eliminarAnom(@Field("id_amon") first: Int): Call<List<OutputPost>>
-
+    fun eliminarAnom(@Field("id_amon") first: Int): Call<List<DeleteAnom>>
 
 }
