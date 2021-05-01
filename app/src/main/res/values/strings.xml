@@ -44,4 +44,6 @@
     <string name="missTitle">Missing Title</string>
     <string name="missDescription">Missing Description</string>
     <string name="editSucess">Anomaly edited with success</string>
+    <string name="deleteAnom">Delete Anomaly</string>
+    <string name="deleteSuccess">Anomaly deleted with success</string>
 </resources>

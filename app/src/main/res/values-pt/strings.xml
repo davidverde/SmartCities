@@ -28,4 +28,6 @@
     <string name="missTitle">Falta o Titulo</string>
     <string name="missDescription">Falta a Descrição</string>
     <string name="editSucess">A anomalia foi editada com sucesso!</string>
+    <string name="deleteAnom">Eliminar Anomalia</string>
+    <string name="deleteSuccess">Anomalia eliminada com sucesso</string>
 </resources>

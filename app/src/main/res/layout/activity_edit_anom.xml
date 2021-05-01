@@ -57,17 +57,39 @@
         android:adjustViewBounds="true"
         />
 
-    <Button
-        android:id="@+id/button_edit"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_below="@+id/imagem_edit"
         android:layout_centerHorizontal="true"
-        android:layout_margin="5dp"
-        android:text="@string/editarAnom"
-        android:background="@color/azulEscuro"
-        android:onClick="editarAnom"
-        />
+        >
+
+        <Button
+            android:id="@+id/button_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="@string/editarAnom"
+            android:background="@color/azulEscuro"
+            android:onClick="editarAnom"
+            android:layout_weight="50"
+            />
+
+        <Button
+            android:id="@+id/button_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="@string/deleteAnom"
+            android:background="@color/azulEscuro"
+            android:onClick="deleteAnom"
+            android:layout_weight="50"
+            />
+
+    </LinearLayout>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"

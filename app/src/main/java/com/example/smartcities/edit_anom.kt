@@ -6,10 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import com.example.smartcities.api.Anomalia
-import com.example.smartcities.api.EditarAnom
-import com.example.smartcities.api.EndPoints
-import com.example.smartcities.api.ServiceBuilder
+import com.example.smartcities.api.*
 import com.google.gson.stream.JsonReader
 import com.squareup.picasso.Picasso
 import retrofit2.Call
@@ -118,18 +115,43 @@ class edit_anom : AppCompatActivity() {
                 }
 
             })
-            Toast.makeText(this@edit_anom, R.string.editSucess, Toast.LENGTH_SHORT).show()
-            startActivity(intent)
+           // Toast.makeText(this@edit_anom, R.string.editSucess, Toast.LENGTH_SHORT).show()
+            //startActivity(intent)
         }
     }
 
 
+    fun deleteAnom(view: View) {    // botão eliminar anomalia
 
-    fun voltarMapa_edit(view: View) { // butão voltar para o mapa
+        var intent = Intent(this, MapsActivity::class.java)
+
+            val request = ServiceBuilder.buildService(EndPoints::class.java)
+            val call = request.eliminarAnom(id_anomalia)
+
+            call.enqueue(object : Callback<List<DeleteAnom>> {
+
+                override fun onResponse(call: Call<List<DeleteAnom>>, response: Response<List<DeleteAnom>>) {
+                    if (response.isSuccessful) {
+                        Toast.makeText(this@edit_anom, R.string.deleteSuccess, Toast.LENGTH_SHORT).show()
+                        startActivity(intent)
+                    }
+                }
+
+                override fun onFailure(call: Call<List<DeleteAnom>>, t: Throwable) {
+                    Log.d("TAG_", "err: " + t.message)
+                }
+
+            })
+
+    }
+
+
+    fun voltarMapa_edit(view: View) { // botão voltar para o mapa
         super.onBackPressed()   // volta para a atividade anterior e apaga a que estamos
     }
 
-    fun addAnom_edit(view: View) {  // butão adicionar anomalia
+    fun addAnom_edit(view: View) {  // botão adicionar anomalia
 
     }
+
 }
