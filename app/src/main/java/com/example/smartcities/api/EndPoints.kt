@@ -18,5 +18,14 @@ interface EndPoints {
     @POST("myslim/api/utl") // pedido POST para verificar o login
     fun postUtl(@Field("email") first: String, @Field("pass") second: String,): Call<List<OutputPost>>
 
+    @FormUrlEncoded
+    @POST("myslim/api/anomalia/editar") // pedido POST para editar anomalia
+    fun editarAnom(@Field("id_amon") first: Int, @Field("titulo") second: String,
+                   @Field("descricao") third: String, @Field("tipo") fourth: String): Call<List<OutputPost>>
+
+    @FormUrlEncoded
+    @POST("myslim/api/anomalia/delete") // pedido POST para eliminar anomalia
+    fun eliminarAnom(@Field("id_amon") first: Int): Call<List<OutputPost>>
+
 
 }
