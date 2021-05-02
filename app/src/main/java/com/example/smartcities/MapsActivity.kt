@@ -3,6 +3,8 @@ package com.example.smartcities
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
+import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -10,10 +12,12 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import com.example.smartcities.api.Anomalia
 import com.example.smartcities.api.EndPoints
 import com.example.smartcities.api.OutputPost
 import com.example.smartcities.api.ServiceBuilder
+import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -29,6 +33,10 @@ import retrofit2.Response
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
 
     private lateinit var mMap: GoogleMap
+    private lateinit var lastLocation: Location
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var locationRequest: LocationRequest
+    private lateinit var locationCallBack: LocationCallback
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,6 +94,24 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
                 Log.d("TAG_", "err: " + t.message)
             }
         })
+
+
+        /* ------ LOCATION CALLBACK --------- */
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
+
+        locationCallBack = object : LocationCallback() {
+            override fun onLocationResult(p0: LocationResult) {
+                super.onLocationResult(p0)
+                lastLocation = p0.lastLocation
+                var loc = LatLng(lastLocation.latitude, lastLocation.longitude)
+                //mMap.addMarker(MarkerOptions().position(loc).title("UTL").icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pessoa)))
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 15.0f))
+                Log.d("DAVIDLOC", "latitude: " + loc.latitude + " - longitude: " + loc.longitude)
+            }
+        }
+
+        createLocationRequest()
 
     }
 
@@ -169,8 +195,35 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
         mMap.setInfoWindowAdapter(infoWindowAdapter(this))
 
         googleMap.setOnInfoWindowClickListener(this)
+
     }
 
+    private fun startLocationUpdates() {
+        if(ActivityCompat.checkSelfPermission(this,
+            android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,
+            arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+            1)
+            return
+        }
+        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallBack, null)
+    }
+
+    private fun createLocationRequest() {
+        locationRequest = LocationRequest()
+        locationRequest.interval = 5000     // 5 segundos
+        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+    }
+
+    override fun onPause() {
+        super.onPause()
+        fusedLocationClient.removeLocationUpdates(locationCallBack)
+    }
+
+    public override fun onResume() {
+        super.onResume()
+        startLocationUpdates()
+    }
 
     // caso o utilizador utilize o botão de voltar para tras do telefone
     override fun onBackPressed() {
@@ -196,9 +249,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
 
     }
 
-
-
-
+    fun add_anom_btn_plus(view: View) {
+        Toast.makeText(this, "OLAAAAAA", Toast.LENGTH_SHORT).show()
+    }
 
 
 }
