@@ -28,7 +28,7 @@ class edit_anom : AppCompatActivity() {
 
         val title = this.findViewById<EditText>(R.id.titulo_info_edit)
         val description = this.findViewById<EditText>(R.id.descricao_anom_edit)
-        val  utl = this.findViewById<TextView>(R.id.utilizador_detalhe_edit)
+        val utl = this.findViewById<TextView>(R.id.utilizador_detalhe_edit)
         var spinner = this.findViewById<Spinner>(R.id.spinner_edit)
         val imagem = this.findViewById<ImageView>(R.id.imagem_edit)
 

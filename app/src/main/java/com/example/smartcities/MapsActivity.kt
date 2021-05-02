@@ -39,6 +39,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
     private lateinit var locationCallBack: LocationCallback
 
     lateinit var loc : LatLng
+    var utl_atual : Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +61,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
             nome = sharedPref.all[getString(R.string.nome_login_user)]
         }
 
+        utl_atual = id_utl.toString().toInt()
 
         // invocar pedido GET anomalias
         val request = ServiceBuilder.buildService(EndPoints::class.java)
@@ -251,8 +253,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
 
     }
 
-    fun add_anom_btn_plus(view: View) {
-        Toast.makeText(this, "OLAAAAAA", Toast.LENGTH_SHORT).show()
+    fun add_anom_btn_plus(view: View) {     // mudar para o ecra de reportar anomalia e passar o utl atual e a localização
+        val intent = Intent(this, add_anom::class.java)
+        intent.putExtra("UTL_ATUAL", utl_atual.toString())
+        intent.putExtra("LAT", loc.latitude.toString())
+        intent.putExtra("LONG", loc.longitude.toString())
+        startActivity(intent)
     }
 
 

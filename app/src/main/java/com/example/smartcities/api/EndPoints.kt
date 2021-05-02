@@ -32,6 +32,6 @@ interface EndPoints {
     fun addAnom(@Field("utilizador_id") first: Int, @Field("titulo") second: String,
                    @Field("descricao") third: String, @Field("tipo") fourth: String,
                     @Field("imagem") fifth: String, @Field("latitude") sixth: Float,
-                     @Field("longitude") seventh: Float): Call<List<Anomalia>>
+                     @Field("longitude") seventh: Float): Call<Anomalia>
 
 }
