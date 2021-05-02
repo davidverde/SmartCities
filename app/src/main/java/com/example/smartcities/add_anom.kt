@@ -54,23 +54,37 @@ class add_anom : AppCompatActivity() {
         var intent = Intent(this, MapsActivity::class.java)
 
         // POST report anomalia
-        val request = ServiceBuilder.buildService(EndPoints::class.java)
-        val call = request.addAnom(utl_atual.toInt(), title.text.toString(), description.text.toString(), tipo, "Image", lat.toFloat(), long.toFloat())
 
-        call.enqueue(object : Callback<Anomalia> {
+        if (title.text.isNullOrEmpty() || description.text.isNullOrEmpty()) {
 
-            override fun onResponse(call: Call<Anomalia>, response: Response<Anomalia>) {
-                if (response.isSuccessful) {
-                    Toast.makeText(this@add_anom, R.string.reportSuccess, Toast.LENGTH_SHORT).show()
-                    startActivity(intent)
+            if (title.text.isNullOrEmpty()) {
+                title.error = getString(R.string.missTitle)
+            }
+            if (description.text.isNullOrEmpty()) {
+                description.error = getString(R.string.miss_description)
+            }
+
+        } else {
+
+
+            val request = ServiceBuilder.buildService(EndPoints::class.java)
+            val call = request.addAnom(utl_atual.toInt(), title.text.toString(), description.text.toString(), tipo, "Image", lat.toFloat(), long.toFloat())
+
+            call.enqueue(object : Callback<Anomalia> {
+
+                override fun onResponse(call: Call<Anomalia>, response: Response<Anomalia>) {
+                    if (response.isSuccessful) {
+                        Toast.makeText(this@add_anom, R.string.reportSuccess, Toast.LENGTH_SHORT).show()
+                        startActivity(intent)
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<Anomalia>, t: Throwable) {
-                Log.d("TAG_", "err: " + t.message)
-            }
+                override fun onFailure(call: Call<Anomalia>, t: Throwable) {
+                    Log.d("TAG_", "err: " + t.message)
+                }
 
-        })
+            })
+        }
     }
 
 

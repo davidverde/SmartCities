@@ -96,17 +96,6 @@
         android:layout_centerHorizontal="true"
         />
 
-    <Button
-        android:id="@+id/button_add_anomaly"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/img_add"
-        android:background="@color/azulEscuro"
-        android:text="@string/add_anomaly"
-        android:layout_marginTop="50dp"
-        android:layout_centerHorizontal="true"
-        />
-
 
     <LinearLayout
         android:layout_width="match_parent"
