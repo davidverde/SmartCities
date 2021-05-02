@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".add_anom">
+
+
+    <TextView
+        android:id="@+id/titulo_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="15dp"
+        android:textSize="24dp"
+        android:layout_marginLeft="15dp" />
+
+    <EditText
+        android:id="@+id/titulo_info_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/titulo"
+        android:layout_below="@id/titulo_add"
+        android:textSize="18dp"
+        android:layout_margin="15dp"
+        />
+
+    <TextView
+        android:id="@+id/tipo_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tipo_"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_below="@id/titulo_info_add"
+        android:textSize="24dp"
+        android:layout_marginLeft="15dp" />
+
+    <Spinner
+        android:id="@+id/spinner_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tipo_add"
+        android:layout_margin="15dp"
+        />
+
+    <TextView
+        android:id="@+id/descricao_add_titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/descricao_"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_below="@id/spinner_add"
+        android:textSize="24dp"
+        android:layout_marginLeft="15dp" />
+
+    <EditText
+        android:id="@+id/descricao_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/descricao"
+        android:layout_below="@id/descricao_add_titulo"
+        android:textSize="18dp"
+        android:layout_margin="15dp"
+        />
+
+    <TextView
+        android:id="@+id/imagem_add_titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/chose_img"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_below="@id/descricao_add"
+        android:textSize="24dp"
+        android:layout_marginLeft="15dp" />
+
+    <Button
+        android:id="@+id/button_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imagem_add_titulo"
+        android:background="@color/azulEscuro"
+        android:text="@string/pick_img"
+        android:layout_margin="15dp"
+        />
+
+    <ImageView
+        android:id="@+id/img_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/button_add"
+        android:layout_centerHorizontal="true"
+        />
+
+    <Button
+        android:id="@+id/button_add_anomaly"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/img_add"
+        android:background="@color/azulEscuro"
+        android:text="@string/add_anomaly"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:background="@color/azulMedio">
+
+        <Button
+            android:id="@+id/AddNote"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/report_anom"
+            android:backgroundTint="@color/azulMedio"
+            android:onClick="addAnom_add"
+            android:layout_weight="40">
+        </Button>
+
+        <Button
+            android:id="@+id/linhabranca"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/white"
+            android:text="."
+            android:layout_weight="1">
+        </Button>
+
+        <Button
+            android:id="@+id/consultNote"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/menu_mapa"
+            android:backgroundTint="@color/azulMedio"
+            android:layout_weight="40"
+            android:onClick="voltarMapa_add">
+        </Button>
+
+    </LinearLayout>
+
+</RelativeLayout>

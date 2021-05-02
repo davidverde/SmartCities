@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartCities">
-        <activity android:name=".edit_anom"></activity>
+        <activity android:name=".add_anom"></activity>
+        <activity android:name=".edit_anom" />
         <activity android:name=".detalhe_anom" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

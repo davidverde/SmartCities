@@ -30,4 +30,10 @@
     <string name="editSucess">A anomalia foi editada com sucesso!</string>
     <string name="deleteAnom">Eliminar Anomalia</string>
     <string name="deleteSuccess">Anomalia eliminada com sucesso</string>
+    <string name="title_">Titulo:</string>
+    <string name="tipo_">Tipo:</string>
+    <string name="descricao_">Descrição:</string>
+    <string name="chose_img">Selecionar Imagem:</string>
+    <string name="pick_img">Escolher Imagem:</string>
+    <string name="add_anomaly">Reportar Anomalia</string>
 </resources>

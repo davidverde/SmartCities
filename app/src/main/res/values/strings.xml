@@ -46,4 +46,10 @@
     <string name="editSucess">Anomaly edited with success</string>
     <string name="deleteAnom">Delete Anomaly</string>
     <string name="deleteSuccess">Anomaly deleted with success</string>
+    <string name="title_">Title:</string>
+    <string name="tipo_">Type:</string>
+    <string name="descricao_">Description:</string>
+    <string name="chose_img">Select Image:</string>
+    <string name="pick_img">Choose Image:</string>
+    <string name="add_anomaly">Report Anomaly</string>
 </resources>
