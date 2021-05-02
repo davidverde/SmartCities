@@ -38,6 +38,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
     private lateinit var locationRequest: LocationRequest
     private lateinit var locationCallBack: LocationCallback
 
+    lateinit var loc : LatLng
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
@@ -104,7 +106,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
             override fun onLocationResult(p0: LocationResult) {
                 super.onLocationResult(p0)
                 lastLocation = p0.lastLocation
-                var loc = LatLng(lastLocation.latitude, lastLocation.longitude)
+                loc = LatLng(lastLocation.latitude, lastLocation.longitude)
                 //mMap.addMarker(MarkerOptions().position(loc).title("UTL").icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pessoa)))
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 15.0f))
                 Log.d("DAVIDLOC", "latitude: " + loc.latitude + " - longitude: " + loc.longitude)

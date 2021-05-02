@@ -27,4 +27,11 @@ interface EndPoints {
     @POST("myslim/api/anomalia/delete") // pedido POST para eliminar anomalia
     fun eliminarAnom(@Field("id_amon") first: Int): Call<List<DeleteAnom>>
 
+    @FormUrlEncoded
+    @POST("myslim/api/anomalia") // pedido POST para reportar anomalia
+    fun addAnom(@Field("utilizador_id") first: Int, @Field("titulo") second: String,
+                   @Field("descricao") third: String, @Field("tipo") fourth: String,
+                    @Field("imagem") fifth: String, @Field("latitude") sixth: Float,
+                     @Field("longitude") seventh: Float): Call<List<Anomalia>>
+
 }
