@@ -1,5 +1,6 @@
 package com.example.smartcities
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -92,5 +93,24 @@ class add_anom : AppCompatActivity() {
         var intent = Intent(this, MapsActivity::class.java)
         startActivity(intent)
     }
+
+    fun escolherImg(view: View) {       // Escolher imagem da galeria
+        openGalleryForImage()
+    }
+
+    private fun openGalleryForImage() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, 1)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK && requestCode == 1){
+            var imageView = this.findViewById<ImageView>(R.id.img_add)
+            imageView.setImageURI(data?.data) // handle chosen image
+        }
+    }
+
 
 }

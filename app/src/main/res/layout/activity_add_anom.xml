@@ -24,27 +24,35 @@
         android:hint="@string/titulo"
         android:layout_below="@id/titulo_add"
         android:textSize="18dp"
+        android:ems="6"
         android:layout_margin="15dp"
         />
 
-    <TextView
-        android:id="@+id/tipo_add"
+    <LinearLayout
+        android:id="@+id/linear_add_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/tipo_"
-        android:layout_marginTop="15dp"
-        android:layout_marginStart="15dp"
-        android:layout_below="@id/titulo_info_add"
-        android:textSize="24dp"
-        android:layout_marginLeft="15dp" />
+        android:layout_below="@+id/titulo_info_add">
+        <TextView
+            android:id="@+id/tipo_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tipo_"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="15dp"
+            android:textSize="24dp"
+            android:layout_marginLeft="15dp" />
 
-    <Spinner
-        android:id="@+id/spinner_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tipo_add"
-        android:layout_margin="15dp"
-        />
+        <Spinner
+            android:id="@+id/spinner_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tipo_add"
+            android:layout_margin="15dp"
+            />
+    </LinearLayout>
+
+
 
     <TextView
         android:id="@+id/descricao_add_titulo"
@@ -53,7 +61,7 @@
         android:text="@string/descricao_"
         android:layout_marginTop="15dp"
         android:layout_marginStart="15dp"
-        android:layout_below="@id/spinner_add"
+        android:layout_below="@id/linear_add_1"
         android:textSize="24dp"
         android:layout_marginLeft="15dp" />
 
@@ -64,35 +72,45 @@
         android:hint="@string/descricao"
         android:layout_below="@id/descricao_add_titulo"
         android:textSize="18dp"
+        android:ems="6"
         android:layout_margin="15dp"
         />
 
-    <TextView
-        android:id="@+id/imagem_add_titulo"
+    <LinearLayout
+        android:id="@+id/linear_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/chose_img"
-        android:layout_marginTop="15dp"
-        android:layout_marginStart="15dp"
         android:layout_below="@id/descricao_add"
-        android:textSize="24dp"
-        android:layout_marginLeft="15dp" />
+        >
+        <TextView
+            android:id="@+id/imagem_add_titulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/chose_img"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="15dp"
+            android:textSize="24dp"
+            android:layout_marginLeft="15dp" />
 
-    <Button
-        android:id="@+id/button_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/imagem_add_titulo"
-        android:background="@color/azulEscuro"
-        android:text="@string/pick_img"
-        android:layout_margin="15dp"
-        />
+        <Button
+            android:id="@+id/button_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/imagem_add_titulo"
+            android:text="@string/pick_img"
+            android:onClick="escolherImg"
+            android:layout_margin="15dp"
+            />
+
+    </LinearLayout>
+
+
 
     <ImageView
         android:id="@+id/img_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/button_add"
+        android:layout_below="@id/linear_add"
         android:layout_centerHorizontal="true"
         />
 
