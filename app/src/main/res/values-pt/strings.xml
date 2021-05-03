@@ -38,4 +38,12 @@
     <string name="add_anomaly">Reportar Anomalia</string>
     <string name="reportSuccess">Anomalia Repotada com Sucesso</string>
     <string name="miss_img">Falta Selecionar uma Imagem</string>
+    <string name="search_type">Pesquisar por Tipo de Anomalia:</string>
+    <string name="search_distance">Pesquisar por Distancia:</string>
+    <string name="metros">Metros</string>
+    <string name="todos">Todos</string>
+    <string name="acidente">Acidente</string>
+    <string name="obras">Obras</string>
+    <string name="mau_estado">Mau Estado</string>
+    <string name="indefinido">Indefinido</string>
 </resources>

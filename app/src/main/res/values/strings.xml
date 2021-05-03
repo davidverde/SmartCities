@@ -55,4 +55,15 @@
     <string name="reportSuccess">Anomaly Reported with Success</string>
     <string name="base_3" translatable="false">base_3</string>
     <string name="miss_img">Image Missing</string>
+    <string name="search_type">Search by Anomaly Type:</string>
+    <string name="search_distance">Search by Distance:</string>
+    <string name="metros">Meters</string>
+    <string name="todos">All</string>
+    <string name="acidente">Accident</string>
+    <string name="obras">Work</string>
+    <string name="mau_estado">Bad State</string>
+    <string name="indefinido">Undefined</string>
+    <string name="metros_500" translatable="false">500 m</string>
+    <string name="metros_1500" translatable="false">1500 m</string>
+    <string name="metros_3000" translatable="false">3000 m</string>
 </resources>

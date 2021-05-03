@@ -33,5 +33,106 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/todos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/todos"
+            app:backgroundTint="@color/azulClaro"
+            app:elevation="6dp"
+            android:textSize="12dp"
+            android:onClick="tipo_todos"
+            android:tint="@color/white"
+            app:rippleColor="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/obras"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="120dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/obras"
+            app:backgroundTint="@color/azulClaro"
+            app:elevation="6dp"
+            android:textSize="12dp"
+            android:onClick="tipo_obras"
+            android:tint="@color/white"
+            app:rippleColor="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/acidente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="216dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/acidente"
+            app:backgroundTint="@color/azulClaro"
+            app:elevation="6dp"
+            android:textSize="12dp"
+            android:onClick="tipo_acidente"
+            android:tint="@color/white"
+            app:rippleColor="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/quinhentos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="80dp"
+            android:text="@string/metros_500"
+            app:backgroundTint="@color/azulClaro"
+            app:elevation="6dp"
+            android:textSize="12dp"
+            android:onClick="distancia_500"
+            android:tint="@color/white"
+            app:rippleColor="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/mil_quinhentos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="120dp"
+            android:layout_marginTop="80dp"
+            android:text="@string/metros_1500"
+            app:backgroundTint="@color/azulClaro"
+            app:elevation="6dp"
+            android:textSize="12dp"
+            android:onClick="distancia_1500"
+            android:tint="@color/white"
+            app:rippleColor="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/tres_mil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="216dp"
+            android:layout_marginTop="80dp"
+            android:text="@string/metros_3000"
+            app:backgroundTint="@color/azulClaro"
+            app:elevation="6dp"
+            android:textSize="12dp"
+            android:onClick="distancia_3000"
+            android:tint="@color/white"
+            app:rippleColor="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </fragment>
