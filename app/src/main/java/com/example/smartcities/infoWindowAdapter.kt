@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.BitmapFactory
+import android.util.Base64
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
@@ -28,13 +30,18 @@ class infoWindowAdapter(context: Context) : GoogleMap.InfoWindowAdapter {
         val tipo = view.findViewById<TextView>(R.id.tipo_anom)
         //val botBar = view.findViewById<LinearLayout>(R.id.bottomBar)
 
-        val strs = marker.snippet.split("+").toTypedArray() // dividir a string que contem a descricao, o url e o id do utl
+        val strs = marker.snippet.split(";").toTypedArray() // dividir a string que contem a descricao, o url e o id do utl
                                                                         // 0-descricao 1-imagem 2-utl_report 3-utl_logado 4-nome_utl_logado 5-tipo
         tvTitle.text = marker.title         // aplicar o TITULO
 
         descricao.text = strs[0]            // aplicar a descricao
 
-        Picasso.get().load(strs[1]).into(imagem); // definir a imagem com o url
+        //Picasso.get().load(strs[1]).into(imagem); // definir a imagem com o url
+
+        // DESCODIFICAR BASE64
+        val decodedString: ByteArray = Base64.decode(strs[1], Base64.DEFAULT)
+        val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+        imagem.setImageBitmap(decodedByte)
 
         imagem.getLayoutParams().height = 450; // ajudtar tamanho da iamgem
         imagem.getLayoutParams().width = 600;

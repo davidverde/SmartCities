@@ -24,7 +24,6 @@
         android:hint="@string/titulo"
         android:layout_below="@id/titulo_add"
         android:textSize="18dp"
-        android:ems="6"
         android:layout_margin="15dp"
         />
 
@@ -72,7 +71,6 @@
         android:hint="@string/descricao"
         android:layout_below="@id/descricao_add_titulo"
         android:textSize="18dp"
-        android:ems="6"
         android:layout_margin="15dp"
         />
 

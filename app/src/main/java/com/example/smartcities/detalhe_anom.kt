@@ -1,8 +1,12 @@
 package com.example.smartcities
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
+import android.graphics.BitmapFactory
 import android.media.Image
 import android.os.Bundle
+import android.util.Base64
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
@@ -10,14 +14,41 @@ import android.widget.ImageView
 import com.squareup.picasso.Picasso
 
 class detalhe_anom : AppCompatActivity() {
+
+    var utl_atual = ""
+    var lat = 0.0f
+    var long = 0.0f
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalhe_anom)
 
-        val titulo = intent.getStringExtra("MARKER")
-        val array = intent.getStringExtra("STRS") //0-descricao 1-imagem 2-utl_report 3-utl_logado 4-nome_utl_logado 5-tipo
+        // guardar a base_3
+        var base_3 : Any? = ""
 
-        val strs = array?.split("+")?.toTypedArray()
+        val sharedPref: SharedPreferences = getSharedPreferences(
+                getString(R.string.login_pref), Context.MODE_PRIVATE
+        )
+        if (sharedPref != null){
+            base_3 = sharedPref.all[getString(R.string.base_3)]
+        }
+
+        val titulo = intent.getStringExtra("MARKER")
+        val descricao_0 = intent.getStringExtra("DESCR")
+        val tipo_5 = intent.getStringExtra("TIPO")
+
+        val base_1 = intent.getStringExtra("BASE1")
+        val base_2 = intent.getStringExtra("BASE2")
+
+        val utl_at = intent.getStringExtra("UTL_ATUAL")
+        val lat_ = intent.getStringExtra("LAT")
+        val long_ = intent.getStringExtra("LONG")
+
+        utl_atual = utl_at!!
+        lat = lat_!!.toFloat()
+        long = long_!!.toFloat()
+
+        val base_64 = base_1+base_2+base_3
 
         val title = this.findViewById<TextView>(R.id.titulo_info_detalhe)
         val type = this.findViewById<TextView>(R.id.tipo_anom_detalhe)
@@ -28,10 +59,13 @@ class detalhe_anom : AppCompatActivity() {
         val tip = getString(R.string.tipo)
 
         title.text = titulo
-        type.text = tip + strs?.get(5)
-        description.text = strs?.get(0)
+        type.text = tip + tipo_5
+        description.text = descricao_0
 
-        Picasso.get().load(strs?.get(1)).into(imagem); // definir a imagem com o url
+        // DESCODIFICAR BASE64
+        val decodedString: ByteArray = Base64.decode(base_64, Base64.DEFAULT)
+        val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+        imagem.setImageBitmap(decodedByte)
 
         imagem.getLayoutParams().height = 650 // ajustar tamanho da iamgem
         imagem.getLayoutParams().width = 800
@@ -43,5 +77,11 @@ class detalhe_anom : AppCompatActivity() {
         super.onBackPressed()   // volta para a atividade anterior e apaga a que estamos
     }
 
-    fun addAnom(view: View) {}
+    fun addAnom(view: View) {
+        val intent = Intent(this, add_anom::class.java)
+        intent.putExtra("UTL_ATUAL", utl_atual)
+        intent.putExtra("LAT", lat.toString())
+        intent.putExtra("LONG", long.toString())
+        startActivity(intent)
+    }
 }

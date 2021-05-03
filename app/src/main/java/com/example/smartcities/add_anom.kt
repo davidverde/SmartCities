@@ -2,25 +2,30 @@ package com.example.smartcities
 
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import com.example.smartcities.api.Anomalia
-import com.example.smartcities.api.EditarAnom
 import com.example.smartcities.api.EndPoints
 import com.example.smartcities.api.ServiceBuilder
-import com.google.android.gms.maps.model.LatLng
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.ByteArrayOutputStream
+
 
 class add_anom : AppCompatActivity() {
 
     var utl_atual = ""
     var lat = ""
     var long = ""
+    var img_64 = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,11 +70,13 @@ class add_anom : AppCompatActivity() {
                 description.error = getString(R.string.miss_description)
             }
 
-        } else {
+        } else if(imagem.drawable == null) {
+            Toast.makeText(this, R.string.miss_img, Toast.LENGTH_SHORT).show()
+        }else {
 
 
             val request = ServiceBuilder.buildService(EndPoints::class.java)
-            val call = request.addAnom(utl_atual.toInt(), title.text.toString(), description.text.toString(), tipo, "Image", lat.toFloat(), long.toFloat())
+            val call = request.addAnom(utl_atual.toInt(), title.text.toString(), description.text.toString(), tipo, img_64, lat.toFloat(), long.toFloat())
 
             call.enqueue(object : Callback<Anomalia> {
 
@@ -105,11 +112,28 @@ class add_anom : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
+        var bitmap : Bitmap
+        super.onActivityResult(requestCode, resultCode, data)       // ir buscar a imagem da galeria
         if (resultCode == Activity.RESULT_OK && requestCode == 1){
             var imageView = this.findViewById<ImageView>(R.id.img_add)
-            imageView.setImageURI(data?.data) // handle chosen image
+            imageView.setImageURI(data?.data) // listar a imagem escolhida
+            bitmap = (imageView.drawable as BitmapDrawable).bitmap  // passar para bitmap
+
+            /* ----- PASSAR PARA BASE64 ------ */
+            val baos = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos) // bm is the bitmap object
+            val b: ByteArray = baos.toByteArray()
+            val encodedImage: String = Base64.encodeToString(b, Base64.DEFAULT)
+            img_64 = encodedImage       // guardar a base64 num var para guardar na BD
+
+            /* // DESCODIFICAR BASE64
+            val decodedString: ByteArray = Base64.decode(encodedImage, Base64.DEFAULT)
+            val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+            imageView.setImageBitmap(decodedByte)*/
+
+
         }
+
     }
 
 

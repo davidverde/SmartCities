@@ -76,16 +76,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
                     for(Anomalia in response.body()!!){   // listar todas as anomalias recebidas no mapa
 
                         coordenadas = LatLng(Anomalia.latitude, Anomalia.longitude)
-
                         if(id_utl.toString().toInt() == Anomalia.utilizador_id){   // se a anomalia for do utilizador logado aparece o marcador azul
                             mMap.addMarker(MarkerOptions()
                                     .position(coordenadas).title(Anomalia.titulo)
-                                    .snippet(Anomalia.descricao + "+" + Anomalia.imagem + "+" + Anomalia.utilizador_id + "+" + id_utl.toString() + "+" + nome.toString() + '+' + Anomalia.tipo + '+' + Anomalia.id_amon)
+                                    .snippet(Anomalia.descricao + ";" + Anomalia.imagem + ";" + Anomalia.utilizador_id + ";" + id_utl.toString() + ";" + nome.toString() + ';' + Anomalia.tipo + ';' + Anomalia.id_amon)
                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
                         } else {
                             mMap.addMarker(MarkerOptions()
                                     .position(coordenadas).title(Anomalia.titulo)   // titulo
-                                    .snippet(Anomalia.descricao + "+" + Anomalia.imagem + "+" + Anomalia.utilizador_id + "+" + id_utl.toString() + "+" + nome.toString() + '+' + Anomalia.tipo + '+' + Anomalia.id_amon)
+                                    .snippet(Anomalia.descricao + ";" + Anomalia.imagem + ";" + Anomalia.utilizador_id + ";" + id_utl.toString() + ";" + nome.toString() + ';' + Anomalia.tipo + ';' + Anomalia.id_amon)
                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)))              //cor
                         }
                     }
@@ -237,17 +236,53 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
 
     override fun onInfoWindowClick(marker: Marker) {
 
-        val strs = marker.snippet.split("+").toTypedArray() //0-descricao 1-imagem 2-utl_report 3-utl_logado 4-nome_utl_logado 5-tipo 6-id_amon
+        val strs = marker.snippet.split(";").toTypedArray() //0-descricao 1-imagem 2-utl_report 3-utl_logado 4-nome_utl_logado 5-tipo 6-id_amon
+
+        var array = strs[1].chunked(strs[1].length/3)
+
+        //Guardar base_3 no Shared Preferences
+        val shared: SharedPreferences = getSharedPreferences(
+                getString(R.string.login_pref), Context.MODE_PRIVATE
+        )
+        with(shared.edit()){
+
+            putString(getString(R.string.base_3), "${array[2]}")
+            commit()
+        }
 
         if(strs[2].toInt() == strs[3].toInt()){     // se o utilizador que reportou a anomalia for o mesmo que tem login iniciado
+
             val intent = Intent(this, edit_anom::class.java)
             intent.putExtra("MARKER", marker.title);
-            intent.putExtra("STRS", marker.snippet);
+            //intent.putExtra("STRS", marker.snippet);
+            //intent.putExtra("BASE", strs[1])
+            intent.putExtra("DESCR", strs[0])
+            intent.putExtra("NOME", strs[4])
+            intent.putExtra("TIPO", strs[5])
+            intent.putExtra("ID_ANOM", strs[6])
+            intent.putExtra("BASE1", array[0])
+            intent.putExtra("BASE2", array[1])
+
+            intent.putExtra("UTL_ATUAL", utl_atual.toString())
+            intent.putExtra("LAT", loc.latitude.toString())
+            intent.putExtra("LONG", loc.longitude.toString())
+            //intent.putExtra("BASE3", array[2])
             startActivity(intent)
+
         }else{                                      // caso nao seja
             val intent = Intent(this, detalhe_anom::class.java)
             intent.putExtra("MARKER", marker.title);
-            intent.putExtra("STRS", marker.snippet);
+            //intent.putExtra("STRS", marker.snippet);
+            //intent.putExtra("BASE", strs[1])
+            intent.putExtra("DESCR", strs[0])
+            intent.putExtra("TIPO", strs[5])
+            intent.putExtra("BASE1", array[0])
+            intent.putExtra("BASE2", array[1])
+
+            intent.putExtra("UTL_ATUAL", utl_atual.toString())
+            intent.putExtra("LAT", loc.latitude.toString())
+            intent.putExtra("LONG", loc.longitude.toString())
+            //intent.putExtra("BASE3", array[2])
             startActivity(intent)
         }
 

@@ -1,7 +1,11 @@
 package com.example.smartcities
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import android.view.View
 import android.widget.*
@@ -16,15 +20,47 @@ import retrofit2.Response
 class edit_anom : AppCompatActivity() {
 
     var id_anomalia = 0
+    var utl_atual = ""
+    var lat = 0.0f
+    var long = 0.0f
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_anom)
 
-        val titulo = intent.getStringExtra("MARKER")
-        val array = intent.getStringExtra("STRS") //0-descricao 1-imagem 2-utl_report 3-utl_logado 4-nome_utl_logado 5-tipo
+        // guardar a base_3
+        var base_3 : Any? = ""
 
-        val strs = array?.split("+")?.toTypedArray()
+        val sharedPref: SharedPreferences = getSharedPreferences(
+                getString(R.string.login_pref), Context.MODE_PRIVATE
+        )
+        if (sharedPref != null){
+            base_3 = sharedPref.all[getString(R.string.base_3)]
+        }
+
+        val titulo = intent.getStringExtra("MARKER")
+        val descricao_0 = intent.getStringExtra("DESCR")
+        val nome_4 = intent.getStringExtra("NOME")
+        val tipo_5 = intent.getStringExtra("TIPO")
+        val id_6 = intent.getStringExtra("ID_ANOM")
+
+        val base_1 = intent.getStringExtra("BASE1")
+        val base_2 = intent.getStringExtra("BASE2")
+
+        val utl_at = intent.getStringExtra("UTL_ATUAL")
+        val lat_ = intent.getStringExtra("LAT")
+        val long_ = intent.getStringExtra("LONG")
+
+        utl_atual = utl_at!!
+        lat = lat_!!.toFloat()
+        long = long_!!.toFloat()
+
+
+        val base_64 = base_1+base_2+base_3
+        Log.d("TAG_", base_64)
+
+        /*val array = intent.getStringExtra("STRS") //0-descricao 1-imagem 2-utl_report 3-utl_logado 4-nome_utl_logado 5-tipo 6-id_anomalia
+        val strs = array?.split(";")?.toTypedArray()*/
 
         val title = this.findViewById<EditText>(R.id.titulo_info_edit)
         val description = this.findViewById<EditText>(R.id.descricao_anom_edit)
@@ -35,15 +71,16 @@ class edit_anom : AppCompatActivity() {
         var tipo = ""
         val report = getString(R.string.reported)
 
-        id_anomalia = strs?.get(6)!!.toInt()
+        id_anomalia = id_6!!.toInt()
         title.setText(titulo)
-        description.setText(strs?.get(0))
-        utl.text = report + strs?.get(4)
+        description.setText(descricao_0)
+        utl.text = report + nome_4
 
 
-
-
-        Picasso.get().load(strs?.get(1)).into(imagem); // definir a imagem com o url
+        // DESCODIFICAR BASE64
+        val decodedString: ByteArray = Base64.decode(base_64, Base64.DEFAULT)
+        val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+        imagem.setImageBitmap(decodedByte)
 
         imagem.getLayoutParams().height = 650 // ajustar tamanho da iamgem
         imagem.getLayoutParams().width = 800
@@ -64,11 +101,11 @@ class edit_anom : AppCompatActivity() {
                 //tipo = ""
             }
         }
-        if(strs[5].equals("Acidente")){
+        if(tipo_5.equals("Acidente")){
             spinner.setSelection(1)
-        }else if(strs[5].equals("Mau estado")){
+        }else if(tipo_5.equals("Mau estado")){
             spinner.setSelection(2)
-        }else if(strs[5].equals("Indefinido")){
+        }else if(tipo_5.equals("Indefinido")){
             spinner.setSelection(3)
         }
     }
@@ -151,7 +188,11 @@ class edit_anom : AppCompatActivity() {
     }
 
     fun addAnom_edit(view: View) {  // botão adicionar anomalia
-
+        val intent = Intent(this, add_anom::class.java)
+        intent.putExtra("UTL_ATUAL", utl_atual)
+        intent.putExtra("LAT", lat.toString())
+        intent.putExtra("LONG", long.toString())
+        startActivity(intent)
     }
 
 }

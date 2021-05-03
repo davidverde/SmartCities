@@ -53,4 +53,6 @@
     <string name="pick_img">Choose Image:</string>
     <string name="add_anomaly">Report Anomaly</string>
     <string name="reportSuccess">Anomaly Reported with Success</string>
+    <string name="base_3" translatable="false">base_3</string>
+    <string name="miss_img">Image Missing</string>
 </resources>

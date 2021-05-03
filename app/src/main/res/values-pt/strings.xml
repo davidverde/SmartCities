@@ -37,4 +37,5 @@
     <string name="pick_img">Escolher Imagem:</string>
     <string name="add_anomaly">Reportar Anomalia</string>
     <string name="reportSuccess">Anomalia Repotada com Sucesso</string>
+    <string name="miss_img">Falta Selecionar uma Imagem</string>
 </resources>
