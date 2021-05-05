@@ -46,4 +46,12 @@
     <string name="obras">Obras</string>
     <string name="mau_estado">Mau Estado</string>
     <string name="indefinido">Indefinido</string>
+    <string name="erro_add_nota">Erro - falta preencher dados</string>
+    <string name="erro_edit_nota">Erro - Falta preencher dados</string>
+    <string name="miss_title">Falta o Titulo</string>
+    <string name="sucess_login">Login efetuado com sucesso</string>
+    <string name="erro_login">Os campos não correspondem</string>
+    <string name="miss_description">Falta a Descrição</string>
+    <string name="erro_email">Falta o Email</string>
+    <string name="erro_pass">Falta a Password</string>
 </resources>

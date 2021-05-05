@@ -62,6 +62,10 @@ dependencies {
     // Dependencies for working with Architecture components
     // You'll probably have to update the version numbers in build.gradle (Project)
 
+    // sensores
+    implementation "com.mikhaellopez:circularprogressbar:3.0.3"
+
+
     // localização
     implementation "com.google.android.gms:play-services-maps:17.0.0"
     implementation "com.google.android.gms:play-services-location:17.0.0"

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true">
+
+
+    <ImageView
+        android:id="@+id/img_log"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:src="@drawable/logo"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:orientation="vertical"
+        android:layout_toRightOf="@+id/img_log"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/startSession"
+            android:textSize="30dp"
+            android:textColor="@color/azulMedio"
+            android:layout_margin="20dp"
+            android:layout_marginTop="15dp"
+            />
+
+        <EditText
+            android:id="@+id/email"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:hint="@string/user"
+            android:background="@drawable/email"
+            android:textColor="@color/azulMedio"
+            android:textColorHint="@color/azulMedio"
+            android:ems="10"
+            android:inputType="text"
+            android:drawableStart="@drawable/costume_ic_email"
+            android:drawableLeft="@drawable/email"/>
+
+        <EditText
+            android:id="@+id/pass"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:hint="@string/pass"
+            android:background="@drawable/email"
+            android:textColor="@color/azulMedio"
+            android:textColorHint="@color/azulMedio"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="15dp"
+            android:ems="10"
+            android:drawableStart="@drawable/costume_ic_pass"
+            android:drawableLeft="@drawable/pass_24"
+            android:inputType="textPassword"/>
+
+        <Button
+            android:id="@+id/password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login"
+            android:backgroundTint="@color/azulClaro"
+            android:onClick="verificarLogin"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
+        </Button>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/erro_log"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="470dp"
+        android:text="@string/erro_login"
+        android:textColor="@color/red"
+        android:visibility="invisible" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:background="@color/azulMedio">
+
+        <Button
+            android:id="@+id/AddNote"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/addNote"
+            android:backgroundTint="@color/azulMedio"
+            android:onClick="addNotas"
+            android:layout_weight="40">
+        </Button>
+
+        <Button
+            android:id="@+id/linhabranca"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/white"
+            android:text="."
+            android:layout_weight="1">
+        </Button>
+
+        <Button
+            android:id="@+id/consultNote"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/ConsultNotes"
+            android:backgroundTint="@color/azulMedio"
+            android:layout_weight="40"
+            android:onClick="listaNotas">
+        </Button>
+
+    </LinearLayout>
+
+</RelativeLayout>

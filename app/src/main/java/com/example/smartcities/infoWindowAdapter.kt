@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.res.Resources
 import android.graphics.BitmapFactory
 import android.util.Base64
 import android.util.Log
@@ -47,10 +48,15 @@ class infoWindowAdapter(context: Context) : GoogleMap.InfoWindowAdapter {
         imagem.getLayoutParams().width = 600;
         imagem.requestLayout();
 
-        tipo.text = "Type: " + strs[5]
+        val ti = mContext.getString(R.string.tipo)
+        val re = mContext.getString(R.string.reported)
+
+
+
+        tipo.text = ti + strs[5]
 
         if(strs[2].toInt() == strs[3].toInt()){     // se o utilizador que reportou a anomalia for o mesmo que tem login iniciado
-            utl.text = "Reported by: " + strs[4]
+            utl.text = re + strs[4]
             utl.visibility = (View.VISIBLE)
         }else{                                      // caso nao seja
             utl.visibility = (View.GONE)

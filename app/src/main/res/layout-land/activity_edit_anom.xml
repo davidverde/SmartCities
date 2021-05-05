@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".edit_anom">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/titulo_info_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/titulo"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        android:layout_margin="5dp"
+        android:layout_centerHorizontal="true"/>
+
+
+    <TextView
+        android:id="@+id/utilizador_detalhe_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_below="@+id/titulo_info_edit"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="5dp"
+        />
+
+    <Spinner
+        android:id="@+id/spinner_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/utilizador_detalhe_edit"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="5dp"
+        />
+
+    <EditText
+        android:id="@+id/descricao_anom_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spinner_edit"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/descricao"
+        android:ems="20"
+        android:textSize="16dp"
+        android:layout_margin="12dp"
+        />
+
+    <ImageView
+        android:id="@+id/imagem_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/descricao_anom_edit"
+        android:layout_centerHorizontal="true"
+        android:adjustViewBounds="true"
+        />
+
+    <LinearLayout
+        android:id="@+id/layout_li"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/imagem_edit"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="20dp"
+        >
+
+        <Button
+            android:id="@+id/button_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="@string/editarAnom"
+            android:background="@color/azulEscuro"
+            android:onClick="editarAnom"
+            android:layout_weight="50"
+            />
+
+        <Button
+            android:id="@+id/button_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="@string/deleteAnom"
+            android:background="@color/azulEscuro"
+            android:onClick="deleteAnom"
+            android:layout_weight="50"
+            />
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/layout_li"
+        android:layout_alignParentBottom="true"
+        android:background="@color/azulMedio">
+
+        <Button
+            android:id="@+id/AddNote"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/report_anom"
+            android:backgroundTint="@color/azulMedio"
+            android:onClick="addAnom_edit"
+            android:layout_weight="40">
+        </Button>
+
+        <Button
+            android:id="@+id/linhabranca"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/white"
+            android:text="."
+            android:layout_weight="1">
+        </Button>
+
+        <Button
+            android:id="@+id/consultNote"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/menu_mapa"
+            android:backgroundTint="@color/azulMedio"
+            android:layout_weight="40"
+            android:onClick="voltarMapa_edit">
+        </Button>
+
+    </LinearLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

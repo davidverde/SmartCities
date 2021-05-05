@@ -4,13 +4,19 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.graphics.Color
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import com.example.smartcities.api.Anomalia
 import com.example.smartcities.api.EndPoints
@@ -26,13 +32,16 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener, SensorEventListener {
 
     private lateinit var mMap: GoogleMap
     private lateinit var lastLocation: Location
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var locationRequest: LocationRequest
     private lateinit var locationCallBack: LocationCallback
+
+    private lateinit var sensorManager: SensorManager
+    private  var brightness : Sensor? = null
 
     lateinit var loc : LatLng
     var utl_atual : Int = 0
@@ -112,6 +121,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
 
         createLocationRequest()
 
+        setUpSensorStuff()  // função sensor
     }
 
 
@@ -225,11 +235,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
     override fun onPause() {
         super.onPause()
         fusedLocationClient.removeLocationUpdates(locationCallBack)
+        sensorManager.unregisterListener(this)
     }
 
     public override fun onResume() {
         super.onResume()
         startLocationUpdates()
+        sensorManager.registerListener(this, brightness, SensorManager.SENSOR_DELAY_NORMAL)
     }
 
     // caso o utilizador utilize o botão de voltar para tras do telefone
@@ -653,6 +665,31 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
                 Log.d("TAG_", "err: " + t.message)
             }
         })
+    }
+
+
+
+    /* ------ SENSORES ------- */
+    override fun onSensorChanged(event: SensorEvent?) {
+        if(event?.sensor?.type == Sensor.TYPE_LIGHT) {
+            val light = event.values[0]
+            Log.d("TAG_", light.toString())
+
+            if(light < 500){
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }else{
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        }
+    }
+
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+        return
+    }
+
+    private fun setUpSensorStuff() {
+        sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
+        brightness = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT)
     }
 
 
